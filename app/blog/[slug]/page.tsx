@@ -116,7 +116,6 @@ export default function Blog({ params }) {
           }),
         }}
       />
-      {JSON.stringify(params)}
       <div className="sticky top-[32px] z-10 dark:bg-[#111010] pb-2">
         <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
           {post.metadata.title}
