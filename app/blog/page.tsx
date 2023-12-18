@@ -33,6 +33,7 @@ export default function BlogPage() {
             href={`/blog/${post.slug}`}
           >
             <div className="w-full flex flex-col">
+              {JSON.stringify(post)}
               <p className="text-neutral-900 dark:text-neutral-100 tracking-tight">
                 {post.metadata.title}
               </p>

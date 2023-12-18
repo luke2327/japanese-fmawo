@@ -11,6 +11,7 @@ export async function generateMetadata({
   params,
 }): Promise<Metadata | undefined> {
   let post = getBlogPosts().find((post) => post.slug === params.slug);
+
   if (!post) {
     return;
   }
@@ -82,7 +83,10 @@ function formatDate(date: string) {
 }
 
 export default function Blog({ params }) {
+  console.log('[parameters]', params)
   let post = getBlogPosts().find((post) => post.slug === params.slug);
+
+  console.log('[post]', post)
 
   if (!post) {
     notFound();
@@ -112,6 +116,7 @@ export default function Blog({ params }) {
           }),
         }}
       />
+      {JSON.stringify(params)}
       <div className="sticky top-[32px] z-10 dark:bg-[#111010] pb-2">
         <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
           {post.metadata.title}
