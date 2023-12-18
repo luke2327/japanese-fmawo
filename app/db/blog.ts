@@ -6,6 +6,12 @@ type Metadata = {
   publishedAt: string;
   summary: string;
   image?: string;
+  writer?: string;
+  category?: string;
+  thumbnailUrl?: string;
+  thumbnailWidth?: string;
+  thumbnailHeight?: string;
+  thumbnailDesc?: string;
 };
 
 function parseFrontmatter(fileContent: string) {
@@ -42,6 +48,7 @@ function extractTweetIds(content) {
 
 function getMDXData(dir) {
   let mdxFiles = getMDXFiles(dir);
+
   return mdxFiles.map((file) => {
     let { metadata, content } = readMDXFile(path.join(dir, file));
     let slug = path.basename(file, path.extname(file));
