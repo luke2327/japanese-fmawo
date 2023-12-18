@@ -87,7 +87,7 @@ export default function Blog({ params }) {
           }),
         }}
       />
-      <div className="sticky top-[32px] z-10 bg-white dark:bg-[#111010] pb-2">
+      <div className="sticky top-[64px] z-10 bg-white dark:bg-[#111010] pb-2">
         <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
           {post.metadata.title}
         </h1>
