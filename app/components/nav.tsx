@@ -19,7 +19,7 @@ const navItems = {
 
 export function Navbar() {
   return (
-    <aside className="-ml-[8px] mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10 py-4">
+    <aside className="-ml-[8px] mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10">
       <div>
         <LayoutGroup>
           <nav
@@ -60,7 +60,7 @@ function NavItem({ path, name }: { path: string; name: string }) {
         }
       )}
     >
-      <span className="relative py-1 px-2">
+      <span className="relative py-1 px-2 text-lg">
         {name}
         {path === pathname ? (
           <motion.div

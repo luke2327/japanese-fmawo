@@ -1,7 +1,7 @@
 import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-export function formatDate(date: string) {
+export function formatDate(date: string, noFormattedDate: boolean = true) {
   let currentDate = new Date();
   if (!date.includes('T')) {
     date = `${date}T00:00:00`;
@@ -30,7 +30,7 @@ export function formatDate(date: string) {
     year: 'numeric',
   });
 
-  return `${fullDate} (${formattedDate})`;
+  return `${fullDate} ${noFormattedDate ? `(${formattedDate})` : ''}`;
 }
 
 export function cn(...inputs: ClassValue[]) {

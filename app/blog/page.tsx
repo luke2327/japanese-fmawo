@@ -6,8 +6,8 @@ import Image from 'next/image';
 import { formatDate } from 'lib/utils';
 
 export const metadata = {
-  title: 'Blog',
-  description: 'Read my thoughts on software development, design, and more.',
+  title: 'Proverb',
+  description: '재미있는 일본과 한국의 속담을 배워봅시다. | 面白い日本と韓国のことわざを学びましょう。 | Let\'s learn some interesting Japanese and Korean proverbs.',
 };
 
 export default function BlogPage() {
@@ -15,9 +15,6 @@ export default function BlogPage() {
 
   return (
     <section>
-      {/* <h1 className="font-medium text-2xl mb-8 tracking-tighter">
-        read my blog
-      </h1> */}
       {allBlogs
         .sort((a, b) => {
           if (
@@ -50,7 +47,7 @@ export default function BlogPage() {
                   {post.metadata.title}
                 </p>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  {formatDate(post.metadata.publishedAt)}
+                  {formatDate(post.metadata.publishedAt, false)}
                 </p>
                 {/* <Suspense fallback={<p className="h-6" />}>
                   <Views slug={post.slug} />
