@@ -39,7 +39,7 @@ export async function generateMetadata({
       description,
       type: 'article',
       publishedTime,
-      url: `https://blog.fmawo.com/blog/${post.slug}`,
+      url: `https://blog.fmawo.com/proverb/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -81,7 +81,7 @@ export default function Blog({ params }) {
             image: post.metadata.image
               ? `https://blog.fmawo.com${post.metadata.image}`
               : `https://blog.fmawo.com/og?title=${post.metadata.title}`,
-            url: `https://blog.fmawo.com/blog/${post.slug}`,
+            url: `https://blog.fmawo.com/proverb/${post.slug}`,
             author: {
               '@type': 'Person',
               name: post.metadata.writer || 'MW',

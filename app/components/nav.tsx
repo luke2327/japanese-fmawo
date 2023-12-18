@@ -12,8 +12,8 @@ const navItems = {
   '/journey': {
     name: 'Journey',
   },
-  '/blog': {
-    name: 'Blog',
+  '/proverb': {
+    name: 'Proverb',
   },
 };
 
@@ -44,8 +44,8 @@ let cx = (...classes) => classes.filter(Boolean).join(' ');
 
 function NavItem({ path, name }: { path: string; name: string }) {
   let pathname = usePathname() || '/';
-  if (pathname.includes('/blog/')) {
-    pathname = '/blog';
+  if (pathname.includes('/proverb/')) {
+    pathname = '/proverb';
   }
   let isActive = path === pathname;
 
