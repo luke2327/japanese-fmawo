@@ -72,7 +72,7 @@ function formatDate(date: string) {
     formattedDate = 'Today';
   }
 
-  let fullDate = targetDate.toLocaleString('en-us', {
+  let fullDate = targetDate.toLocaleString('ko-kr', {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
@@ -112,20 +112,25 @@ export default function Blog({ params }) {
           }),
         }}
       />
-      <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
-        {post.metadata.title}
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(post.metadata.publishedAt)}
-        </p>
-        <Suspense fallback={<p className="h-5" />}>
-          <Views slug={post.slug} />
-        </Suspense>
+      <div className="sticky top-[32px] z-10 dark:bg-[#111010] pb-2">
+        <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
+          {post.metadata.title}
+        </h1>
+        <div className="flex justify-between items-center my-2 text-sm max-w-[650px]">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400">
+            {formatDate(post.metadata.publishedAt)}
+          </p>
+          <Suspense fallback={<p className="h-5" />}>
+            <Views slug={post.slug} />
+          </Suspense>
+        </div>
       </div>
       <article className="prose prose-quoteless prose-neutral dark:prose-invert">
         <CustomMDX source={post.content} />
       </article>
+      <div className='mt-4'>
+        <label>Comment</label>
+      </div>
     </section>
   );
 }
