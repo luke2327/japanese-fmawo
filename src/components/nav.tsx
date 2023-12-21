@@ -1,34 +1,33 @@
-'use client';
+"use client";
 
-import { motion, LayoutGroup } from 'framer-motion';
-import { usePathname } from 'next/navigation';
-import { Suspense } from 'react';
-import Link from 'next/link';
+import { motion, LayoutGroup } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { Suspense } from "react";
+import Link from "next/link";
 
 const navItems = {
-  '/': {
-    name: 'Home',
+  "/": {
+    name: "Home",
   },
-  '/journey': {
-    name: 'Journey',
+  "/journey": {
+    name: "Journey",
   },
-  '/proverb': {
-    name: 'Proverb',
+  "/proverb": {
+    name: "Proverb",
   },
-  '/dictionary': {
-    name: 'Dictionary',
+  "/dictionary": {
+    name: "Dictionary",
   },
 };
 
 export function Navbar() {
   return (
-    <aside className="-ml-[8px] mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10">
+    <aside className="-ml-[8px] mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10 py-2">
       <div>
         <LayoutGroup>
           <nav
             className="flex flex-row items-start relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
-            id="nav"
-          >
+            id="nav">
             <div className="flex flex-row space-x-0 pr-10">
               <Suspense fallback={null}>
                 {Object.entries(navItems).map(([path, { name }]) => {
@@ -43,12 +42,12 @@ export function Navbar() {
   );
 }
 
-let cx = (...classes) => classes.filter(Boolean).join(' ');
+let cx = (...classes) => classes.filter(Boolean).join(" ");
 
 function NavItem({ path, name }: { path: string; name: string }) {
-  let pathname = usePathname() || '/';
-  if (pathname.includes('/proverb/')) {
-    pathname = '/proverb';
+  let pathname = usePathname() || "/";
+  if (pathname.includes("/proverb/")) {
+    pathname = "/proverb";
   }
   let isActive = path === pathname;
 
@@ -57,12 +56,11 @@ function NavItem({ path, name }: { path: string; name: string }) {
       key={path}
       href={path}
       className={cx(
-        'transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle',
+        "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle",
         {
-          'text-neutral-500': !isActive,
+          "text-neutral-500": !isActive,
         }
-      )}
-    >
+      )}>
       <span className="relative py-1 px-2 text-lg">
         {name}
         {path === pathname ? (
@@ -70,7 +68,7 @@ function NavItem({ path, name }: { path: string; name: string }) {
             className="absolute h-[1px] top-7 mx-2 inset-0 bg-neutral-200 dark:bg-neutral-800 z-[-1] dark:bg-gradient-to-r from-transparent to-neutral-900"
             layoutId="sidebar"
             transition={{
-              type: 'spring',
+              type: "spring",
               stiffness: 350,
               damping: 30,
             }}

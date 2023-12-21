@@ -22,7 +22,7 @@
     ],
     "strictNullChecks": true,
     "paths": {
-      "@/*": ["./app*"],
+      "@/*": ["./src/*"],
       "~/*": ["./public/*"]
     }
   },

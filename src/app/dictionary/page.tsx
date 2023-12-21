@@ -1,35 +1,31 @@
-import { config } from "src/lib/config";
+import { MainCategory } from "@/components/dictionary/main-category";
+import { fetcher } from "@/lib/fetch";
+
+export const metadata = {
+  title: "Dictionary",
+  description:
+    "유행하는단어나 네이티브의 한국어를 배워봅시다. | 流行の単語やネイティブの韓国語を学びましょう。 | Let's learn popular words and native Korean.",
+};
+
+export type DictionaryCategoryList = Record<
+  string,
+  {
+    category_no: number;
+    home_category: string;
+    main_category: string;
+    main_category_no: string;
+    sub_category: string;
+  }[]
+>;
 
 export default async function Page() {
-  const res = await fetch(config.apiHost + "/global-dict/category-list", {
-    cache: "no-store",
-  });
-  const data = (await res.json()) as {
-    result: Record<
-      string,
-      {
-        category_no: number;
-        category1: string;
-        category2: string;
-        category3: string;
-      }[]
-    >;
-  };
-
-  console.log(111, data);
+  const data = await fetcher<DictionaryCategoryList>(
+    "/global-dict/category/list"
+  );
 
   return (
-    <div className="grid grid-cols-4">
-      {Object.entries(data.result).map(([categoryTitle, val], idx) => (
-        <div key={idx}>
-          <p className="font-bold">{categoryTitle}</p>
-          <div>
-            {val.map((item) => (
-              <p key={item.category_no}>{item.category3}</p>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
+    <section>
+      <MainCategory dictionaryCategoryList={data} />
+    </section>
   );
 }

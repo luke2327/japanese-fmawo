@@ -3,7 +3,7 @@ import typography from "@tailwindcss/typography";
 
 export default {
   content: [
-    "./src/app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
     "./src/content/**/*.mdx",
     "./public/**/*.svg",
   ],
@@ -20,6 +20,9 @@ export default {
             "blockquote p:first-of-type::after": { content: "none" },
           },
         },
+      },
+      colors: {
+        "regal-green": "#0e7912",
       },
     },
   },
