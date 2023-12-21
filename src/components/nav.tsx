@@ -15,9 +15,9 @@ const navItems = {
   "/proverb": {
     name: "Proverb",
   },
-  "/dictionary": {
-    name: "Dictionary",
-  },
+  // "/dictionary": {
+  //   name: "Dictionary",
+  // },
 };
 
 export function Navbar() {
