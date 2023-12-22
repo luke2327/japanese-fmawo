@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/proverb",
     "/uses",
     "/journey",
-    "dictionary",
+    "/dictionary",
   ].map((route) => ({
     url: `https://app.maplew.com${route}`,
     lastModified: new Date().toISOString().split("T")[0],
