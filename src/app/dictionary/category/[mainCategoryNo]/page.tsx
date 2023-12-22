@@ -1,5 +1,6 @@
 import { fetcher } from "@/lib/fetch";
 import { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({
@@ -16,7 +17,7 @@ export async function generateMetadata({
   }
 
   const { mainCategoryName, subCategoryNames } = data;
-  const ogImage = `https://blog.fmawo.com/og?title=${mainCategoryName}`;
+  const ogImage = `https://app.maplew.com/og?title=${mainCategoryName}`;
   const description = `${mainCategoryName} | ${subCategoryNames}`;
 
   return {
@@ -28,7 +29,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime: "2023-12-23",
-      url: `https://blog.fmawo.com/dictionary/category/${params.mainCategoryNo}`,
+      url: `https://app.maplew.com/dictionary/category/${params.mainCategoryNo}`,
       images: [
         {
           url: ogImage,
@@ -65,12 +66,18 @@ export default async function Page({
         <h1 className="text-[20px] font-bold">{data.mainCategoryName}</h1>
         <p className="text-neutral-400">（{data.mainCategoryWordCount}）</p>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-3 border-neutral-600 border">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 p-2 border-neutral-600 border">
         {data.mainCategoryList.map((x, idx) => (
-          <div key={idx} className="flex items-baseline gap-2">
-            <p>{x.sub_category}</p>
-            <p className="text-neutral-400">({x.content.length})</p>
-          </div>
+          <Link
+            key={idx}
+            href={`/dictionary/category/${params.mainCategoryNo}/${x.sub_category}`}>
+            <div className="flex items-baseline gap-2 text-[12px]">
+              <p className="text-blue-400 hover:underline cursor-pointer">
+                {x.sub_category}
+              </p>
+              <p className="text-neutral-400">({x.content.length})</p>
+            </div>
+          </Link>
         ))}
       </div>
     </section>

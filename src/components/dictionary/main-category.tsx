@@ -15,7 +15,7 @@ export function MainCategory({ dictionaryCategoryList }: IProps) {
         {Object.entries(dictionaryCategoryList).map(
           ([categoryTitle, val], idx) => (
             <div key={idx}>
-              <h1 className="font-bold text-[12px] text-green-600 border-l-green-600 border-l-2 pl-1">
+              <h1 className="font-bold text-[12px] text-blue-400 border-l-blue-400 border-l-2 pl-1">
                 <Link href={`/dictionary/category/${val[0].main_category_no}`}>
                   {categoryTitle}
                 </Link>
@@ -25,7 +25,11 @@ export function MainCategory({ dictionaryCategoryList }: IProps) {
                   <li
                     key={item.category_no}
                     className="text-[12px] hover:font-bold hover:scale-106 cursor-pointer transition-all list-decimal">
-                    {item.sub_category}
+                    <Link
+                      key={idx}
+                      href={`/dictionary/category/${item.main_category_no}/${item.sub_category}`}>
+                      {item.sub_category}
+                    </Link>
                   </li>
                 ))}
               </div>

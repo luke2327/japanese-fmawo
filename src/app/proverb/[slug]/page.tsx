@@ -26,8 +26,8 @@ export async function generateMetadata({
     image,
   } = post.metadata;
   let ogImage = image
-    ? `https://blog.fmawo.com${image}`
-    : `https://blog.fmawo.com/og?title=${title}`;
+    ? `https://app.maplew.com${image}`
+    : `https://app.maplew.com/og?title=${title}`;
 
   description = `${title} | ${description}`;
 
@@ -39,7 +39,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `https://blog.fmawo.com/proverb/${post.slug}`,
+      url: `https://app.maplew.com/proverb/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -79,9 +79,9 @@ export default function Blog({ params }) {
             dateModified: post.metadata.publishedAt,
             description: post.metadata.summary,
             image: post.metadata.image
-              ? `https://blog.fmawo.com${post.metadata.image}`
-              : `https://blog.fmawo.com/og?title=${post.metadata.title}`,
-            url: `https://blog.fmawo.com/proverb/${post.slug}`,
+              ? `https://app.maplew.com${post.metadata.image}`
+              : `https://app.maplew.com/og?title=${post.metadata.title}`,
+            url: `https://app.maplew.com/proverb/${post.slug}`,
             author: {
               "@type": "Person",
               name: post.metadata.writer || "MW",

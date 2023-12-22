@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "center",
-          backgroundImage: "url(https://blog.fmawo.com/og-bg.png)",
+          backgroundImage: "url(https://app.maplew.com/og-bg.png)",
         }}>
         <div
           style={{

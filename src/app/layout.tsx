@@ -9,7 +9,7 @@ import { PreloadResources } from "./preload";
 import { Footer } from "../components/footer";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://blog.fmawo.com"),
+  metadataBase: new URL("https://app.maplew.com"),
   title: {
     default: "MW",
     template: "%s | MW",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MW",
     description: "Developer, writer, and creator.",
-    url: "https://blog.fmawo.com",
+    url: "https://app.maplew.com",
     siteName: "MW",
     locale: "ko_KR",
     type: "website",
@@ -59,7 +59,7 @@ export default function RootLayout({
         GeistSans.variable,
         GeistMono.variable
       )}>
-      <body className="antialiased max-w-2xl mb-4 flex flex-col md:flex-row mx-4 lg:mx-auto">
+      <body className="antialiased max-w-3xl mb-4 flex flex-col md:flex-row mx-4 lg:mx-auto">
         <main className="flex-auto min-w-0 mt-4 flex flex-col px-2 md:px-0">
           <Navbar />
           {children}
