@@ -52,10 +52,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({
-  params: { subCategory, mainCategoryNo },
-}: IProps) {
-  const mainCategoryName = dictionaryMainCategoryNameMatch[mainCategoryNo];
+export default async function Page({ params: { subCategory } }: IProps) {
   const subCategoryName = decodeURI(subCategory);
 
   if (subCategoryName === "sprite.svg") {
@@ -66,12 +63,8 @@ export default async function Page({
     "/global-dict/category/sub/detail/" + subCategoryName
   );
 
-  console.log("data", data);
-
-  console.log("data", data);
-
   return (
-    <section>
+    <section id="sub-category">
       <div className="flex items-baseline gap-3 mb-2">
         <h1 className="text-[20px] font-bold">{data.sub_category}</h1>
         <p className="text-[16px] text-neutral-400 tracking-widest">

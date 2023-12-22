@@ -24,7 +24,7 @@ export default async function Page() {
   );
 
   return (
-    <section>
+    <section id="dictionary">
       <MainCategory dictionaryCategoryList={data} />
     </section>
   );

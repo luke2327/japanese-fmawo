@@ -61,7 +61,7 @@ export default async function Page({
   }
 
   return (
-    <section>
+    <section id="main-category">
       <div className="flex items-baseline gap-2 mb-2">
         <h1 className="text-[20px] font-bold">{data.mainCategoryName}</h1>
         <p className="text-neutral-400">（{data.mainCategoryWordCount}）</p>
