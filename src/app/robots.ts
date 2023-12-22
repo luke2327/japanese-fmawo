@@ -2,10 +2,10 @@ export default function robots() {
   return {
     rules: [
       {
-        userAgent: '*',
+        userAgent: "*",
       },
     ],
-    sitemap: 'https://blog.fmawo.com/sitemap.xml',
-    host: 'https://blog.fmawo.com',
+    sitemap: "https://app.maplew.com/sitemap.xml",
+    host: "https://app.maplew.com",
   };
 }
