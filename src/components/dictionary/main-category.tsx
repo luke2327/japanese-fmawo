@@ -11,7 +11,7 @@ export function MainCategory({ dictionaryCategoryList }: IProps) {
       <div className="text-center bg-neutral-600 m-0.5 py-0.5">
         韓国語のカテゴリー
       </div>
-      <div className="grid grid-cols-4 gap-4 p-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-3">
         {Object.entries(dictionaryCategoryList).map(
           ([categoryTitle, val], idx) => (
             <div key={idx}>

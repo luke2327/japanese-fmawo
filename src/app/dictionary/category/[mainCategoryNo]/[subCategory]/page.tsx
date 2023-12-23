@@ -75,21 +75,23 @@ export default async function Page({ params: { subCategory } }: IProps) {
       </div>
       <Divider />
       <table
-        className="text-[12px] w-full table-fixed max-w-full border-neutral-600 border p-0.5"
+        className="text-[12px] w-full table table-fixed max-w-full border-neutral-600 border p-0.5"
         border={1}>
-        <thead className="bg-neutral-600 w-full table">
+        <thead className="bg-neutral-600 w-full table-header-group">
           <tr>
             <th className="w-[20%]">韓国語単語</th>
-            <th className="w-[30%]">韓国語発音</th>
+            <th className="w-[30%] hidden md:table-cell">韓国語発音</th>
             <th className="w-[50%]">日本語意味</th>
           </tr>
         </thead>
-        <tbody className="w-full table">
+        <tbody className="w-full">
           {data.content.map((val) => (
             <tr key={val.word_no}>
-              <Td className="w-[20%] border-l-0" val={val.mean_ko}></Td>
               <Td
-                className="w-[30%]"
+                className="w-[20%] border-l-0 font-skybori"
+                val={val.mean_ko}></Td>
+              <Td
+                className="w-[30%] hidden md:table-cell"
                 val={val.pronunciation?.split(",").pop() as string}></Td>
               <Td
                 className="w-[50%] text-blue-400 hover:underline cursor-pointer"
@@ -105,6 +107,7 @@ export default async function Page({ params: { subCategory } }: IProps) {
 function Td({ val, className }: { val: string; className: string }) {
   return (
     <td
+      style={{ textWrap: "pretty" }}
       className={cn(
         "border-neutral-600 border-t border-l px-2.5 py-1.5",
         className
