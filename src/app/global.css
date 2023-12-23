@@ -48,6 +48,14 @@ html {
   margin-bottom: 0.25em;
 }
 
+.prose
+  :where(.prose > ol > li > *:last-child):not(
+    :where([class~="not-prose"], [class~="not-prose"] *)
+  ) {
+  margin-bottom: 0.25em;
+  margin-top: 0.25em;
+}
+
 .prose a {
   @apply transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
 }
@@ -135,4 +143,8 @@ table {
 
 .title {
   text-wrap: balance;
+}
+
+#ja-proverb-title {
+  font-family: var(--font-azuki);
 }

@@ -92,9 +92,10 @@ export default function Blog({ params }) {
       />
       <div className="sticky top-0 z-20 bg-white dark:bg-[#111010] py-2">
         <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
-          {post.metadata.title}
+          <span className="font-azuki">{post.metadata.titleJa}</span>
+          <span className="font-skybori">({post.metadata.titleKo})</span>
         </h1>
-        <div className="justify-between items-center my-2 text-sm max-w-[650px] hidden md:flex">
+        <div className="justify-between items-center my-2 text-sm max-w-[650px] hidden md:flex font-skybori">
           <div className="flex justify-between items-center text-sm">
             <p
               id="writer"
@@ -111,10 +112,10 @@ export default function Blog({ params }) {
           </Suspense>
         </div>
       </div>
-      <article className="prose prose-quoteless prose-neutral dark:prose-invert">
+      <article className="prose prose-quoteless prose-neutral dark:prose-invert font-skybori">
         <CustomMDX source={post.content} />
       </article>
-      <div className="mt-12 flex flex-col gap-2">
+      <div className="mt-12 flex flex-col gap-2 font-skybori">
         <label>댓글</label>
         <div className="grid w-full gap-2">
           <Textarea className="w-full h-[80px]"></Textarea>
