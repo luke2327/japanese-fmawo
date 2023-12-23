@@ -46,7 +46,9 @@ function CustomLink(props) {
 }
 
 function RoundedImage(props) {
-  return <Image alt={props.alt} className="rounded-lg" {...props} />;
+  console.log(props);
+  const { noImage, ...rest } = props;
+  return !noImage && <Image alt={props.alt} className="rounded-lg" {...rest} />;
 }
 
 function Callout(props) {
@@ -129,7 +131,9 @@ function slugify(str) {
 function createHeading(level) {
   // eslint-disable-next-line react/display-name
   return ({ children }) => {
+    const [content] = children.split("#");
     let slug = slugify(children);
+
     return React.createElement(
       `h${level}`,
       { id: slug },
@@ -140,7 +144,7 @@ function createHeading(level) {
           className: "anchor",
         }),
       ],
-      children
+      content
     );
   };
 }
