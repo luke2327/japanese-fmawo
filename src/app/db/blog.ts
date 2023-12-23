@@ -52,22 +52,34 @@ function extractTweetIds(content) {
   return tweetMatches?.map((tweet) => tweet.match(/[0-9]+/g)[0]) || [];
 }
 
-function getMDXData(dir) {
+type MDXData = {
+  metadata: Metadata;
+  slug: string;
+  tweetIds: any;
+  content: string;
+};
+
+function getMDXData(dir, keyword?: string): MDXData[] {
   let mdxFiles = getMDXFiles(dir);
 
-  return mdxFiles.map((file) => {
-    let { metadata, content } = readMDXFile(path.join(dir, file));
-    let slug = path.basename(file, path.extname(file));
-    let tweetIds = extractTweetIds(content);
-    return {
-      metadata,
-      slug,
-      tweetIds,
-      content,
-    };
-  });
+  return mdxFiles
+    .map((file) => {
+      let { metadata, content } = readMDXFile(path.join(dir, file));
+      let slug = path.basename(file, path.extname(file));
+      let tweetIds = extractTweetIds(content);
+
+      if (!keyword || content.includes(keyword)) {
+        return {
+          metadata,
+          slug,
+          tweetIds,
+          content,
+        };
+      }
+    })
+    .filter((post) => !!post) as MDXData[];
 }
 
-export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), "src/content"));
+export function getBlogPosts(keyword?: string) {
+  return getMDXData(path.join(process.cwd(), "src/content"), keyword);
 }
