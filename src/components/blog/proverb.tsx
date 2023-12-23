@@ -37,7 +37,7 @@ async function ProverbPage({ keyword }: IProps) {
               {post.metadata.thumbnailUrl && !post.metadata.noImage ? (
                 <div>
                   <Image
-                    className="rounded-md"
+                    className="rounded-md border border-neutral-600 min-w-[68px] min-h-[68px]"
                     src={post.metadata.thumbnailUrl}
                     alt={post.metadata.thumbnailDesc as string}
                     width={post.metadata.thumbnailWidth as unknown as number}
@@ -47,8 +47,8 @@ async function ProverbPage({ keyword }: IProps) {
               ) : (
                 <div className="min-w-[44.27px] w-[44.27px] h-[44.27px] border border-neutral-600 rounded-md"></div>
               )}
-              <div className="w-full flex flex-col">
-                <p className="text-neutral-900 dark:text-neutral-100 tracking-tight flex flex-wrap gap-0.5 items-center">
+              <div className="w-full flex flex-col min-h-[68px] justify-between">
+                <p className="text-neutral-900 dark:text-neutral-100 tracking-tight flex flex-wrap items-center">
                   <span className="font-azuki">{post.metadata.titleJa}</span>
                   <span className="font-skybori">
                     ({post.metadata.titleKo})
