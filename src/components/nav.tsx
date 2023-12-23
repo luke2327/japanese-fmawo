@@ -22,7 +22,7 @@ const navItems = {
 
 export function Navbar() {
   return (
-    <aside className="-ml-[8px] mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10 py-2">
+    <aside className="-ml-[8px] mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10 py-2 font-skybori">
       <div>
         <LayoutGroup>
           <nav

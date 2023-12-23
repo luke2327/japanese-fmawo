@@ -1,13 +1,36 @@
 import "./global.css";
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
 import { Navbar } from "../components/nav";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { PreloadResources } from "./preload";
 import { Footer } from "../components/footer";
 import { config } from "@/lib/config";
+import localFont from "next/font/local";
+import { Raleway } from "next/font/google";
+
+const raleway = Raleway({
+  variable: "--font-raleway",
+  subsets: ["latin"],
+});
+
+const azuki = localFont({
+  src: [
+    {
+      path: "../../public/fonts/azuki.ttf",
+    },
+  ],
+  variable: "--font-azuki",
+});
+
+const skybori = localFont({
+  src: [
+    {
+      path: "../../public/fonts/skybori.ttf",
+    },
+  ],
+  variable: "--font-skybori",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(config.host),
@@ -56,9 +79,10 @@ export default function RootLayout({
     <html
       lang="ko"
       className={cx(
-        "text-black bg-white dark:text-white dark:bg-[#111010]",
-        GeistSans.variable,
-        GeistMono.variable
+        "text-black bg-white dark:text-white dark:bg-[#111010] font-azuki",
+        raleway.variable,
+        azuki.variable,
+        skybori.variable
       )}>
       <body className="antialiased max-w-3xl mb-4 flex flex-col md:flex-row mx-4 lg:mx-auto">
         <main className="flex-auto min-w-0 mt-4 flex flex-col px-2 md:px-0">

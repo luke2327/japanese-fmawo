@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 export function formatDate(date: string, noFormattedDate: boolean = true) {
   let currentDate = new Date();
-  if (!date.includes('T')) {
+  if (!date.includes("T")) {
     date = `${date}T00:00:00`;
   }
   let targetDate = new Date(date);
@@ -12,7 +12,7 @@ export function formatDate(date: string, noFormattedDate: boolean = true) {
   let monthsAgo = currentDate.getMonth() - targetDate.getMonth();
   let daysAgo = currentDate.getDate() - targetDate.getDate();
 
-  let formattedDate = '';
+  let formattedDate = "";
 
   if (yearsAgo > 0) {
     formattedDate = `${yearsAgo}y ago`;
@@ -21,16 +21,16 @@ export function formatDate(date: string, noFormattedDate: boolean = true) {
   } else if (daysAgo > 0) {
     formattedDate = `${daysAgo}d ago`;
   } else {
-    formattedDate = 'Today';
+    formattedDate = "Today";
   }
 
-  let fullDate = targetDate.toLocaleString('ko-kr', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
+  let fullDate = targetDate.toLocaleString("ko-kr", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
   });
 
-  return `${fullDate} ${noFormattedDate ? `(${formattedDate})` : ''}`;
+  return `${fullDate} ${noFormattedDate ? `(${formattedDate})` : ""}`;
 }
 
 export function cn(...inputs: ClassValue[]) {

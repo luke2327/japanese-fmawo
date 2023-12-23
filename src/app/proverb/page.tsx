@@ -31,7 +31,7 @@ export default function BlogPage() {
             className="flex flex-col space-y-1 mb-4"
             href={`/proverb/${post.slug}`}>
             <div className="flex items-center gap-2">
-              {post.metadata.thumbnailUrl && (
+              {post.metadata.thumbnailUrl && !post.metadata.noImage ? (
                 <div>
                   <Image
                     className="rounded-md"
@@ -41,12 +41,17 @@ export default function BlogPage() {
                     height={post.metadata.thumbnailHeight as unknown as number}
                   />
                 </div>
+              ) : (
+                <div className="min-w-[44.27px] w-[44.27px] h-[44.27px] border border-neutral-600 rounded-md"></div>
               )}
               <div className="w-full flex flex-col">
-                <p className="text-neutral-900 dark:text-neutral-100 tracking-tight">
-                  {post.metadata.title}
+                <p className="text-neutral-900 dark:text-neutral-100 tracking-tight flex flex-wrap gap-0.5 items-center">
+                  <span className="font-azuki">{post.metadata.titleJa}</span>
+                  <span className="font-skybori">
+                    ({post.metadata.titleKo})
+                  </span>
                 </p>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 font-skybori">
                   {formatDate(post.metadata.publishedAt, false)}
                 </p>
                 {/* <Suspense fallback={<p className="h-6" />}>

@@ -3,6 +3,8 @@ import path from "path";
 
 type Metadata = {
   title: string;
+  titleKo: string;
+  titleJa: string;
   publishedAt: string;
   summary: string;
   image?: string;
@@ -12,6 +14,7 @@ type Metadata = {
   thumbnailWidth?: string;
   thumbnailHeight?: string;
   thumbnailDesc?: string;
+  noImage?: boolean;
 };
 
 function parseFrontmatter(fileContent: string) {
@@ -26,8 +29,11 @@ function parseFrontmatter(fileContent: string) {
     let [key, ...valueArr] = line.split(": ");
     let value = valueArr.join(": ").trim();
     value = value.replace(/^['"](.*)['"]$/, "$1"); // Remove quotes
-    metadata[key.trim() as keyof Metadata] = value;
+    metadata[key.trim()] = value;
   });
+
+  metadata.titleKo = metadata.title?.match(/\((.+)\)/)![1].trim();
+  metadata.titleJa = metadata.title?.split("(")![0].trim();
 
   return { metadata: metadata as Metadata, content };
 }

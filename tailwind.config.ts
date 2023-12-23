@@ -8,10 +8,21 @@ export default {
     "./public/**/*.svg",
   ],
   theme: {
+    screens: {
+      xs: "360px",
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
     extend: {
       fontFamily: {
         sans: ["var(--font-geist-sans)"],
         mono: ["var(--font-geist-mono)"],
+        raleway: ["var(--font-raleway)"],
+        azuki: ["var(--font-azuki)"],
+        skybori: ["var(--font-skybori)"],
       },
       typography: {
         quoteless: {
