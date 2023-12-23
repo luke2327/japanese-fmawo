@@ -9,6 +9,9 @@ import { increment } from "src/app/db/actions";
 import { formatDate } from "src/lib/utils";
 import { Textarea } from "src/components/ui/textarea";
 import { Button } from "src/components/ui/button";
+import { config } from "@/lib/config";
+
+const { host } = config;
 
 export async function generateMetadata({
   params,
@@ -25,9 +28,7 @@ export async function generateMetadata({
     summary: description,
     image,
   } = post.metadata;
-  let ogImage = image
-    ? `https://blog.fmawo.com${image}`
-    : `https://blog.fmawo.com/og?title=${title}`;
+  let ogImage = image ? host + image : `${host}/og?title=${title}`;
 
   description = `${title} | ${description}`;
 
@@ -39,7 +40,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `https://blog.fmawo.com/proverb/${post.slug}`,
+      url: `${host}/proverb/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -79,9 +80,9 @@ export default function Blog({ params }) {
             dateModified: post.metadata.publishedAt,
             description: post.metadata.summary,
             image: post.metadata.image
-              ? `https://blog.fmawo.com${post.metadata.image}`
-              : `https://blog.fmawo.com/og?title=${post.metadata.title}`,
-            url: `https://blog.fmawo.com/proverb/${post.slug}`,
+              ? host + post.metadata.image
+              : `${host}/og?title=${post.metadata.title}`,
+            url: `${host}/proverb/${post.slug}`,
             author: {
               "@type": "Person",
               name: post.metadata.writer || "MW",

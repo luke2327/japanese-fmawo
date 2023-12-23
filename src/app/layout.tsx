@@ -7,9 +7,10 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { PreloadResources } from "./preload";
 import { Footer } from "../components/footer";
+import { config } from "@/lib/config";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://blog.fmawo.com"),
+  metadataBase: new URL(config.host),
   title: {
     default: "MW",
     template: "%s | MW",
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MW",
     description: "Developer, writer, and creator.",
-    url: "https://blog.fmawo.com",
+    url: config.host,
     siteName: "MW",
     locale: "ko_KR",
     type: "website",

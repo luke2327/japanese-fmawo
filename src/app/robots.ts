@@ -1,11 +1,14 @@
-export default function robots() {
+import { config } from "@/lib/config";
+import { MetadataRoute } from "next";
+
+export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: '*',
+        userAgent: "*",
       },
     ],
-    sitemap: 'https://blog.fmawo.com/sitemap.xml',
-    host: 'https://blog.fmawo.com',
+    sitemap: `${config.host}/sitemap.xml`,
+    host: config.host,
   };
 }
