@@ -1,10 +1,11 @@
+import { config } from "@/lib/config";
 import { getBlogPosts } from "src/app/db/blog";
 import dictionarySitemap from "@/constant/dictionary.sitemap";
 import { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const blogs: MetadataRoute.Sitemap = getBlogPosts().map((post) => ({
-    url: `https://app.maplew.com/proverb/${post.slug}`,
+export default async function sitemap() {
+  let blogs = getBlogPosts().map((post) => ({
+    url: `${config.host}/proverb/${post.slug}`,
     lastModified: post.metadata.publishedAt,
   }));
   const dictionary: MetadataRoute.Sitemap = dictionarySitemap.map((url) => ({
@@ -19,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/journey",
     "/dictionary",
   ].map((route) => ({
-    url: `https://app.maplew.com${route}`,
+    url: config.host + route,
     lastModified: new Date().toISOString().split("T")[0],
   }));
 
