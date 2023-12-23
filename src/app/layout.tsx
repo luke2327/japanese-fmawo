@@ -1,5 +1,5 @@
 import "./global.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Navbar } from "../components/nav";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -31,6 +31,17 @@ const skybori = localFont({
   ],
   variable: "--font-skybori",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "#111010" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(config.host),
