@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export default function Error({
   error,
@@ -15,7 +15,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div>
+    <div className="font-raleway">
       <p>Oh no, something went wrong... maybe refresh?</p>
     </div>
   );
