@@ -7,9 +7,8 @@ import { getBlogPosts } from "src/app/db/blog";
 import ViewCounter from "../view-counter";
 import { increment } from "src/app/db/actions";
 import { formatDate } from "src/lib/utils";
-import { Textarea } from "src/components/ui/textarea";
-import { Button } from "src/components/ui/button";
 import { config } from "@/lib/config";
+import { Comment } from "@/components/blog/comment";
 
 const { host } = config;
 
@@ -115,13 +114,7 @@ export default function Blog({ params }) {
       <article className="prose prose-quoteless prose-neutral dark:prose-invert font-skybori">
         <CustomMDX source={post.content} />
       </article>
-      <div className="mt-12 flex flex-col gap-2 font-skybori">
-        <label>댓글</label>
-        <div className="grid w-full gap-2">
-          <Textarea className="w-full h-[80px]"></Textarea>
-          <Button>작성</Button>
-        </div>
-      </div>
+      <Comment />
     </section>
   );
 }
