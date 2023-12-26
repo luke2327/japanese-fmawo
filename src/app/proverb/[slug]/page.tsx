@@ -9,36 +9,31 @@ import { increment } from "src/app/db/actions";
 import { formatDate } from "src/lib/utils";
 import { config } from "@/lib/config";
 import { Comment } from "@/components/blog/comment";
+import { getPostingDetail } from "@/app/db/blog-client";
 
 const { host } = config;
 
 export async function generateMetadata({
   params,
 }): Promise<Metadata | undefined> {
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+  const post = await getPostingDetail(params.slug);
 
   if (!post) {
     return;
   }
 
-  let {
-    title,
-    publishedAt: publishedTime,
-    summary: description,
-    image,
-  } = post.metadata;
-  let ogImage = image ? host + image : `${host}/og?title=${title}`;
-
-  description = `${title} | ${description}`;
+  let ogImage = post.thumbnailUrl
+    ? host + post.thumbnailUrl
+    : `${host}/og?title=${post.title}`;
 
   return {
-    title,
-    description,
+    title: post.title,
+    description: post.description,
     openGraph: {
-      title,
-      description,
+      title: post.title,
+      description: post.description,
       type: "article",
-      publishedTime,
+      publishedTime: post.publishedAt,
       url: `${host}/proverb/${post.slug}`,
       images: [
         {
@@ -48,16 +43,15 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: post.title,
+      description: post.description,
       images: [ogImage],
     },
   };
 }
 
-export default function Blog({ params }) {
-  console.log("[parameters]", params);
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+export default async function Blog({ params }) {
+  const post = await getPostingDetail(params.slug);
 
   console.log("[post]", post);
 
@@ -74,36 +68,36 @@ export default function Blog({ params }) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: post.metadata.image
-              ? host + post.metadata.image
-              : `${host}/og?title=${post.metadata.title}`,
+            headline: post.title,
+            datePublished: post.publishedAt,
+            dateModified: post.publishedAt,
+            description: post.summary,
+            image: post.thumbnailUrl
+              ? host + post.thumbnailUrl
+              : `${host}/og?title=${post.title}`,
             url: `${host}/proverb/${post.slug}`,
             author: {
               "@type": "Person",
-              name: post.metadata.writer || "MW",
+              name: post.writer || "MW",
             },
           }),
         }}
       />
       <div className="sticky top-0 z-20 bg-white dark:bg-[#111010] py-2">
         <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
-          <span className="font-azuki">{post.metadata.titleJa}</span>
-          <span className="font-skybori">({post.metadata.titleKo})</span>
+          <span className="font-azuki">{post.titleJa}</span>
+          <span className="font-skybori">({post.titleKo})</span>
         </h1>
         <div className="justify-between items-center my-2 text-sm max-w-[650px] hidden md:flex font-skybori">
           <div className="flex justify-between items-center text-sm">
             <p
               id="writer"
               className="text-sm text-neutral-600 dark:text-neutral-400">
-              {post.metadata.writer}
+              {post.writer}
             </p>
             <p className="mx-1">・</p>
             <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              {formatDate(post.metadata.publishedAt)}
+              {formatDate(post.publishedAt)}
             </p>
           </div>
           <Suspense fallback={<p className="h-5" />}>
@@ -112,7 +106,7 @@ export default function Blog({ params }) {
         </div>
       </div>
       <article className="prose prose-quoteless prose-neutral dark:prose-invert font-skybori">
-        <CustomMDX source={post.content} />
+        <CustomMDX source={post.contents} />
       </article>
       <Comment />
     </section>

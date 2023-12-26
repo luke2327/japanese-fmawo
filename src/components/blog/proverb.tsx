@@ -1,4 +1,4 @@
-import { getMDXData } from "@/app/db/blog-client";
+import { getPostings, insertPosts } from "@/app/db/blog-client";
 import { fetcher } from "@/lib/fetch";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,19 +11,13 @@ type IProps = {
 };
 
 async function ProverbPage({ keyword }: IProps) {
-  const allBlogs = getMDXData(
-    await fetcher<BlogPost[]>(
-      `/blog/proverb/list${keyword ? `/${keyword}` : ""}`
-    )
-  );
+  const posts = await getPostings(keyword);
 
   return (
     <div>
-      {allBlogs
+      {posts
         .sort((a, b) => {
-          if (
-            new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
-          ) {
+          if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
             return -1;
           }
           return 1;
@@ -34,14 +28,14 @@ async function ProverbPage({ keyword }: IProps) {
             className="flex flex-col space-y-1 mb-4"
             href={`/proverb/${post.slug}`}>
             <div className="flex items-center gap-2">
-              {post.metadata.thumbnailUrl && !post.metadata.noImage ? (
+              {post.thumbnailUrl ? (
                 <div>
                   <Image
                     className="rounded-md border border-neutral-600 min-w-[68px] min-h-[68px]"
-                    src={post.metadata.thumbnailUrl}
-                    alt={post.metadata.thumbnailDesc as string}
-                    width={post.metadata.thumbnailWidth as unknown as number}
-                    height={post.metadata.thumbnailHeight as unknown as number}
+                    src={post.thumbnailUrl}
+                    alt={post.description as string}
+                    width={post.thumbnailWidth as unknown as number}
+                    height={post.thumbnailHeight as unknown as number}
                   />
                 </div>
               ) : (
@@ -49,13 +43,11 @@ async function ProverbPage({ keyword }: IProps) {
               )}
               <div className="w-full flex flex-col min-h-[68px] justify-between">
                 <p className="text-neutral-900 dark:text-neutral-100 tracking-tight flex flex-wrap items-center">
-                  <span className="font-azuki">{post.metadata.titleJa}</span>
-                  <span className="font-skybori">
-                    ({post.metadata.titleKo})
-                  </span>
+                  <span className="font-azuki">{post.title}</span>
+                  <span className="font-skybori">({post.titleKo})</span>
                 </p>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400 font-skybori">
-                  {formatDate(post.metadata.publishedAt, false)}
+                  {formatDate(post.publishedAt, false)}
                 </p>
                 {/* <Suspense fallback={<p className="h-6" />}>
                   <Views slug={post.slug} />
