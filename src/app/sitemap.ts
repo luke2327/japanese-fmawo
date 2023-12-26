@@ -1,13 +1,13 @@
+import { getPostings } from "@/app/db/blog-client";
 import { config } from "@/lib/config";
-import { getBlogPosts } from "src/app/db/blog";
 
 export default async function sitemap() {
-  let blogs = getBlogPosts().map((post) => ({
+  const blogs = (await getPostings()).map((post) => ({
     url: `${config.host}/proverb/${post.slug}`,
-    lastModified: post.metadata.publishedAt,
+    lastModified: post.publishedAt,
   }));
 
-  let routes = ["", "/proverb", "/uses", "/journey"].map((route) => ({
+  const routes = ["", "/proverb", "/uses", "/journey"].map((route) => ({
     url: config.host + route,
     lastModified: new Date().toISOString().split("T")[0],
   }));

@@ -2,15 +2,16 @@ import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function formatDate(date: string, noFormattedDate: boolean = true) {
-  let currentDate = new Date();
+  const currentDate = new Date();
+
   if (!date.includes("T")) {
     date = `${date}T00:00:00`;
   }
-  let targetDate = new Date(date);
+  const targetDate = new Date(date);
 
-  let yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
-  let monthsAgo = currentDate.getMonth() - targetDate.getMonth();
-  let daysAgo = currentDate.getDate() - targetDate.getDate();
+  const yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
+  const monthsAgo = currentDate.getMonth() - targetDate.getMonth();
+  const daysAgo = currentDate.getDate() - targetDate.getDate();
 
   let formattedDate = "";
 
@@ -24,7 +25,7 @@ export function formatDate(date: string, noFormattedDate: boolean = true) {
     formattedDate = "Today";
   }
 
-  let fullDate = targetDate.toLocaleString("ko-kr", {
+  const fullDate = targetDate.toLocaleString("ko-kr", {
     month: "long",
     day: "numeric",
     year: "numeric",
