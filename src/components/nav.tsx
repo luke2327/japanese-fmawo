@@ -18,6 +18,9 @@ const navItems = {
   "/dictionary": {
     name: "Dictionary",
   },
+  "/contents": {
+    name: "Contents",
+  },
 };
 
 export function Navbar() {

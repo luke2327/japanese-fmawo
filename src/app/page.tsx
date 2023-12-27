@@ -34,9 +34,17 @@ export default function Page() {
       </div>
       <div id="resume-link" className="mt-4">
         <h5 className="text-lg">Resume</h5>
-        <Link href="https://resume.maplew.com/">
+        <Link href="https://resume.maplew.com">
           <p className="text-neutral-400 transition-colors hover:text-neutral-200">
             https://resume.maplew.com
+          </p>
+        </Link>
+      </div>
+      <div id="resume-link" className="mt-4">
+        <h5 className="text-lg">Mail</h5>
+        <Link href="mailto:qwepoi8526@gmail.com">
+          <p className="text-neutral-400 transition-colors hover:text-neutral-200">
+            qwepoi8526@gmail.com
           </p>
         </Link>
       </div>

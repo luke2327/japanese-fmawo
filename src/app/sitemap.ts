@@ -19,6 +19,7 @@ export default async function sitemap() {
     "/uses",
     "/journey",
     "/dictionary",
+    "/contents",
   ].map((route) => ({
     url: config.host + route,
     lastModified: new Date().toISOString().split("T")[0],
