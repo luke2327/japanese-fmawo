@@ -1,4 +1,9 @@
-import { MDXData, Metadata, Posting } from "@/interface/blog.interface";
+import {
+  MDXData,
+  Metadata,
+  Posting,
+  PostingInsert,
+} from "@/interface/blog.interface";
 import { fetcher } from "@/lib/fetch";
 
 function parseFrontmatter(fileContent: string) {
@@ -29,7 +34,8 @@ function extractTweetIds(content) {
 
 export async function getPostings(keyword?: string | null) {
   const datas = await fetcher<Posting[]>(
-    `/blog/proverb/list${keyword ? `/${keyword}` : ""}`
+    `/blog/proverb/list${keyword ? `/${keyword}` : ""}`,
+    { next: { revalidate: 60 } }
   );
 
   return datas.map((data) => {
@@ -115,4 +121,91 @@ export async function insertPosts(data: MDXData[]) {
   //     "Content-Type": "application/json",
   //   },
   // });
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+
+  return result.toISOString().split("T")[0];
+}
+
+type GetFormattedMDX = {
+  contents: string;
+  title: {
+    titleKorean: string;
+    titleEnglish: string;
+    titleJapanese: string;
+  };
+  slug: string;
+};
+
+export function getFormattedMDX({ contents, title, slug }: GetFormattedMDX) {
+  try {
+    const englishTitle = capitalizeFirstLetter(title.titleEnglish) + ".";
+    const image = `<Image
+  alt={\`${title.titleJapanese} (${title.titleKorean}) | ${englishTitle}\`}
+  src={\`/images/${slug}/picture.jpg\`}
+  width={1680}
+  height={184}
+/>\n`;
+
+    contents = contents
+      .replace(/일본 속담: "(.+)"/, "$1#ja-proverb-title")
+      .replace("## 이야기 부분", "## 이야기");
+
+    const separate = contents.match(/.*/g) as RegExpMatchArray;
+    const index = separate.findIndex((x) => x.trim().includes("## 사용 예문"));
+    const separate2 = separate.slice(index, 99);
+    const origin = separate.slice(0, index);
+    const examples = ["## 사용 예문", ""];
+
+    separate2.forEach((x, idx) => {
+      if (
+        x.trim().startsWith("1. ") ||
+        x.trim().startsWith("2. ") ||
+        x.trim().startsWith("3. ")
+      ) {
+        const korean =
+          separate2[idx + 2].trim() === ""
+            ? separate2[idx + 1].trim()
+            : separate2[idx + 2].trim();
+        examples.push(`${x}<br /> ${korean}`);
+      }
+    });
+
+    const fileContent = image + origin.join("\n") + examples.join("\n");
+
+    return fileContent;
+  } catch (e) {
+    console.log(2, e);
+  }
+}
+
+export async function addPosting(body: PostingInsert) {
+  const data = await fetcher<Posting>("/blog/proverb/posting", {
+    method: "post",
+    body: JSON.stringify(body),
+    headers: { "Content-Type": "application/json" },
+  });
+
+  return data;
+}
+
+export async function translate(body: {
+  text: string;
+  source: string;
+  target: string;
+}) {
+  const data = await fetcher<string>("/language/translate", {
+    method: "post",
+    body: JSON.stringify(body),
+    headers: { "Content-Type": "application/json" },
+  });
+
+  return data;
 }

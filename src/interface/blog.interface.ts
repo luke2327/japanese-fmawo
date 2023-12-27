@@ -48,3 +48,20 @@ export type Posting = {
   thumbnailWidth: 48;
   thumbnailHeight: 48;
 };
+
+export type PostingInsert = {
+  postIndex: number;
+  contents: string;
+  slug: string;
+  titleKo: string;
+  titleJa: string;
+  titleEn: string;
+  writer: string;
+  thumbnailUrl: string;
+  postNo?: number;
+  language?: "ko" | "en";
+  type?: "proverb";
+  publishedAt?: string;
+  thumbnailWidth?: number;
+  thumbnailHeight?: number;
+};

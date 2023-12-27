@@ -9,6 +9,7 @@ import { config } from "@/lib/config";
 import localFont from "next/font/local";
 import { Raleway } from "next/font/google";
 import GoogleAnalytics from "@/components/google-analytics";
+import { Toaster } from "@/components/ui/toaster";
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -105,6 +106,7 @@ export default function RootLayout({
           <Footer />
         </main>
         <GoogleAnalytics />
+        <Toaster />
       </body>
     </html>
   );
