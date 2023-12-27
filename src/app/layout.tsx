@@ -8,6 +8,7 @@ import { Footer } from "../components/footer";
 import { config } from "@/lib/config";
 import localFont from "next/font/local";
 import { Raleway } from "next/font/google";
+import { Toaster } from "@/components/ui/toaster";
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -104,6 +105,7 @@ export default function RootLayout({
           <PreloadResources />
           <Footer />
         </main>
+        <Toaster />
       </body>
     </html>
   );
