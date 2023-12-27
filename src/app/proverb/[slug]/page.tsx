@@ -3,7 +3,6 @@ import { Suspense, cache } from "react";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "src/components/mdx";
 import { getViewsCount } from "src/app/db/queries";
-import { getBlogPosts } from "src/app/db/blog";
 import ViewCounter from "../view-counter";
 import { increment } from "src/app/db/actions";
 import { formatDate } from "src/lib/utils";

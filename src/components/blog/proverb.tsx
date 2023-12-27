@@ -1,9 +1,7 @@
-import { getPostings, insertPosts } from "@/app/db/blog-client";
-import { fetcher } from "@/lib/fetch";
+import { getPostings } from "@/app/db/blog-client";
 import Link from "next/link";
 import Image from "next/image";
 import { formatDate } from "@/lib/utils";
-import { BlogPost } from "@/interface/blog.interface";
 import React from "react";
 
 type IProps = {
