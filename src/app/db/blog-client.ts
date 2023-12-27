@@ -1,4 +1,4 @@
-import { BlogPost, MDXData, Metadata } from "@/interface/blog.interface";
+import { MDXData, Metadata, Posting } from "@/interface/blog.interface";
 import { fetcher } from "@/lib/fetch";
 
 function parseFrontmatter(fileContent: string) {
@@ -28,7 +28,7 @@ function extractTweetIds(content) {
 }
 
 export async function getPostings(keyword?: string | null) {
-  const datas: Posting[] = await fetcher<Posting[]>(
+  const datas = await fetcher<Posting[]>(
     `/blog/proverb/list${keyword ? `/${keyword}` : ""}`
   );
 
@@ -50,23 +50,6 @@ export async function getPostings(keyword?: string | null) {
     };
   });
 }
-
-type Posting = {
-  postNo: number;
-  postIndex: number;
-  contents: string;
-  language: "ko";
-  slug: string;
-  type: "proverb";
-  titleKo: string;
-  titleJa: string;
-  titleEn: string;
-  writer: string;
-  publishedAt: string;
-  thumbnailUrl: string;
-  thumbnailWidth: 48;
-  thumbnailHeight: 48;
-};
 
 export async function getPostingDetail(slug: string) {
   const data = await fetcher<Posting>("/blog/proverb/detail/" + slug);
