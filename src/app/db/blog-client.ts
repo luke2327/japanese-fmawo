@@ -1,4 +1,5 @@
 import { BlogPost, MDXData, Metadata } from "@/interface/blog.interface";
+import { fetcher } from "@/lib/fetch";
 
 function parseFrontmatter(fileContent: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
@@ -26,16 +27,109 @@ function extractTweetIds(content) {
   return tweetMatches?.map((tweet) => tweet.match(/[0-9]+/g)[0]) || [];
 }
 
-export function getMDXData(mdxFiles: BlogPost[]): MDXData[] {
-  return mdxFiles.map((file) => {
-    let { metadata, content } = parseFrontmatter(file.contents);
-    let tweetIds = extractTweetIds(content);
+export async function getPostings(keyword?: string | null) {
+  const datas: Posting[] = await fetcher<Posting[]>(
+    `/blog/proverb/list${keyword ? `/${keyword}` : ""}`
+  );
 
+  return datas.map((data) => {
     return {
-      metadata,
-      slug: file.slug,
-      tweetIds,
-      content,
+      title: `${data.titleJa} (${data.titleKo})`,
+      titleJa: data.titleJa,
+      titleKo: data.titleKo,
+      publishedAt: data.publishedAt,
+      summary: data.titleEn,
+      writer: data.writer,
+      category: data.type,
+      thumbnailUrl: data.thumbnailUrl,
+      thumbnailWidth: data.thumbnailWidth,
+      thumbnailHeight: data.thumbnailHeight,
+      description: `${data.titleJa} | ${data.titleKo} | ${data.titleEn}`,
+      contents: data.contents,
+      slug: data.slug,
     };
   });
+}
+
+type Posting = {
+  postNo: number;
+  postIndex: number;
+  contents: string;
+  language: "ko";
+  slug: string;
+  type: "proverb";
+  titleKo: string;
+  titleJa: string;
+  titleEn: string;
+  writer: string;
+  publishedAt: string;
+  thumbnailUrl: string;
+  thumbnailWidth: 48;
+  thumbnailHeight: 48;
+};
+
+export async function getPostingDetail(slug: string) {
+  const data = await fetcher<Posting>("/blog/proverb/detail/" + slug);
+
+  return {
+    title: `${data.titleJa} (${data.titleKo})`,
+    titleJa: data.titleJa,
+    titleKo: data.titleKo,
+    publishedAt: data.publishedAt,
+    summary: data.titleEn,
+    writer: data.writer,
+    category: data.type,
+    thumbnailUrl: data.thumbnailUrl,
+    thumbnailWidth: data.thumbnailWidth,
+    thumbnailHeight: data.thumbnailHeight,
+    description: `${data.titleJa} | ${data.titleKo} | ${data.titleEn}`,
+    contents: data.contents,
+    slug: data.slug,
+  };
+}
+
+export async function insertPosts(data: MDXData[]) {
+  const insertData = [] as any[];
+  const randomDate = (step: number): string => {
+    const x = parseInt(`${(Math.random() * 100) % step}`) + 1;
+
+    if (x < 10) {
+      return `0${x}`;
+    }
+
+    return `${x}`;
+  };
+
+  for (const mdx of data) {
+    const props = {} as any;
+
+    props.slug = mdx.slug;
+    props.title_ko = mdx.metadata.titleKo;
+    props.title_ja = mdx.metadata.titleJa;
+    props.title_en = mdx.metadata.summary.endsWith(".")
+      ? mdx.metadata.summary.slice(0, -1)
+      : mdx.metadata.summary;
+    props.published_at = `${mdx.metadata.publishedAt} ${randomDate(
+      24
+    )}:${randomDate(60)}:${randomDate(60)}`;
+    props.thumbnail_url = mdx.metadata.thumbnailUrl;
+    props.writer = "Maria Matsuoka";
+    props.post_index = Number(
+      mdx.metadata.thumbnailUrl?.split("/images/")[1].split("-")[0]
+    );
+    props.slug = mdx.metadata.thumbnailUrl
+      ?.split("/images/")[1]
+      .split("/picture.jpg")[0]
+      .replace(/\d\d\d-/, "");
+
+    insertData.push(props);
+  }
+
+  // await fetcher(`/blog/proverb/posting`, {
+  //   method: "POST",
+  //   body: JSON.stringify(insertData),
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // });
 }

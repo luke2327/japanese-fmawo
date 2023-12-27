@@ -1,19 +1,19 @@
+import { getPostings } from "@/app/db/blog-client";
 import { config } from "@/lib/config";
-import { getBlogPosts } from "src/app/db/blog";
-import dictionarySitemap from "@/constant/dictionary.sitemap";
 import { MetadataRoute } from "next";
+import dictionarySitemap from "@/constant/dictionary.sitemap";
 
 export default async function sitemap() {
-  let blogs = getBlogPosts().map((post) => ({
+  const blogs = (await getPostings()).map((post) => ({
     url: `${config.host}/proverb/${post.slug}`,
-    lastModified: post.metadata.publishedAt,
+    lastModified: post.publishedAt,
   }));
   const dictionary: MetadataRoute.Sitemap = dictionarySitemap.map((url) => ({
     url,
     lastModified: "2023-12-25",
   }));
 
-  let routes: MetadataRoute.Sitemap = [
+  const routes: MetadataRoute.Sitemap = [
     "",
     "/proverb",
     "/uses",
