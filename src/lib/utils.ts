@@ -38,3 +38,9 @@ export function formatDate(date: string, noFormattedDate: boolean = true) {
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export function blockingSprite(slug: string) {
+  if (slug === "sprite.svg") {
+    throw "sprite.svg is blocked";
+  }
+}
