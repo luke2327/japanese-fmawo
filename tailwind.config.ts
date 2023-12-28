@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
+import tailwindAnimate from "tailwindcss-animate";
 
 export default {
   content: [
@@ -40,5 +41,5 @@ export default {
   future: {
     hoverOnlyWhenSupported: true,
   },
-  plugins: [typography],
+  plugins: [typography, tailwindAnimate],
 } satisfies Config;
