@@ -1,20 +1,23 @@
 import type { Metadata } from "next";
-import { Suspense, cache } from "react";
+import { Suspense, cache, useRef } from "react";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "src/components/mdx";
 import { getViewsCount } from "src/app/db/queries";
 import ViewCounter from "../view-counter";
 import { increment } from "src/app/db/actions";
-import { formatDate } from "src/lib/utils";
+import { blockingSprite, formatDate } from "src/lib/utils";
 import { config } from "@/lib/config";
 import { Comment } from "@/components/blog/comment";
 import { getPostingDetail } from "@/app/db/blog-client";
+import Share from "@/components/share";
 
 const { host } = config;
 
 export async function generateMetadata({
   params,
 }): Promise<Metadata | undefined> {
+  blockingSprite(params.slug);
+
   const post = await getPostingDetail(params.slug);
 
   if (!post) {
@@ -50,6 +53,8 @@ export async function generateMetadata({
 }
 
 export default async function Blog({ params }) {
+  blockingSprite(params.slug);
+
   const post = await getPostingDetail(params.slug);
 
   console.log("[post]", post);
@@ -83,11 +88,11 @@ export default async function Blog({ params }) {
         }}
       />
       <div className="sticky top-0 z-20 bg-white dark:bg-[#111010] py-2">
-        <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
+        <h1 className="title font-medium md:text-2xl text-lg tracking-tighter max-w-[650px]">
           <span className="font-azuki">{post.titleJa}</span>
           <span className="font-skybori">({post.titleKo})</span>
         </h1>
-        <div className="justify-between items-center my-2 text-sm max-w-[650px] hidden md:flex font-skybori">
+        <div className="justify-between items-center my-2 text-sm max-w-[650px] flex font-skybori">
           <div className="flex justify-between items-center text-sm">
             <p
               id="writer"
@@ -99,9 +104,12 @@ export default async function Blog({ params }) {
               {formatDate(post.publishedAt)}
             </p>
           </div>
-          <Suspense fallback={<p className="h-5" />}>
-            <Views slug={post.slug} />
-          </Suspense>
+          <div className="flex gap-2 items-center">
+            <Suspense fallback={<p className="h-5" />}>
+              <Views slug={post.slug} />
+            </Suspense>
+            <Share />
+          </div>
         </div>
       </div>
       <article className="prose prose-quoteless prose-neutral dark:prose-invert font-skybori">

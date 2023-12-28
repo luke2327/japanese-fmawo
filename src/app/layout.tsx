@@ -96,8 +96,8 @@ export default function RootLayout({
         azuki.variable,
         skybori.variable
       )}>
-      <body className="antialiased max-w-3xl mb-4 flex flex-col md:flex-row mx-4 lg:mx-auto">
-        <main className="flex-auto min-w-0 mt-4 flex flex-col px-2 md:px-0">
+      <body className="antialiased max-w-2xl mb-4 flex flex-col md:flex-row mx-1 lg:mx-auto">
+        <main className="flex-auto min-w-0 mt-4 flex flex-col px-2">
           <Navbar />
           {children}
           <Analytics />
