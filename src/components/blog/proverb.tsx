@@ -22,7 +22,7 @@ async function ProverbPage({ keyword }: IProps) {
             {post.thumbnailUrl ? (
               <div>
                 <Image
-                  className="rounded-md border border-neutral-600 min-w-[68px] min-h-[68px]"
+                  className="rounded-md border border-neutral-300 dark:border-neutral-600 min-w-[68px] min-h-[68px]"
                   src={post.thumbnailUrl}
                   alt={post.description as string}
                   width={post.thumbnailWidth as unknown as number}

@@ -52,7 +52,7 @@ function NavItem({ path, name }: { path: string; name: string }) {
   if (pathname.includes("/proverb/")) {
     pathname = "/proverb";
   }
-  let isActive = path === pathname;
+  const isActive = path === pathname;
 
   return (
     <Link
@@ -60,9 +60,7 @@ function NavItem({ path, name }: { path: string; name: string }) {
       href={path}
       className={cx(
         "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle",
-        {
-          "text-neutral-500": !isActive,
-        }
+        isActive ? "dark:text-neutral-200" : "text-neutral-500"
       )}>
       <span className="relative py-1 px-2 text-lg">
         {name}
