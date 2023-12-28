@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { LucideShare2 } from "lucide-react";
+import { LucideCheck, LucideShare2 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { config } from "@/lib/config";
 import {
@@ -27,8 +27,11 @@ function Share() {
           height={16}
         />
       </PopoverTrigger>
-      <PopoverContent className="w-auto font-raleway text-[12px]">
-        <p className="dark:text-neutral-100 text-neutral-600">Copied! 🥳</p>
+      <PopoverContent className="w-auto font-raleway text-[12px] py-0.5">
+        <p className="dark:text-neutral-100 text-neutral-600 flex items-center gap-1">
+          <LucideCheck strokeWidth={1} width={16} height={16} />
+          コピーしました
+        </p>
       </PopoverContent>
     </Popover>
   );
