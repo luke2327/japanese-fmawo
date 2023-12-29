@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Suspense, cache, useRef } from "react";
+import { Suspense, cache } from "react";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "src/components/mdx";
 import { getViewsCount } from "src/app/db/queries";
