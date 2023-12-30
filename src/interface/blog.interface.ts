@@ -45,6 +45,18 @@ export type BlogPost = {
   tags: string[];
 };
 
+export type BlogComment = {
+  postNo: number;
+  commentNo: number;
+  cascadeCommentNo: number;
+  comment: string;
+  createdAt: string;
+  id: string;
+  password: string;
+  userAgent: string;
+  ipAddress: string;
+};
+
 export type PostingInsert = Required<
   Pick<
     BlogPost,
