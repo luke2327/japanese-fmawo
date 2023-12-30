@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * 이 파일은 React와 TypeScript를 사용하여 블로그 게시물을 등록하는 페이지를 구현합니다.
+ * 다양한 UI 컴포넌트를 사용하며, 블로그 클라이언트에서 데이터를 가져오고 추가하는 함수를 사용합니다.
+ * react-hook-form과 zod를 사용하여 폼 유효성 검사를 수행하고, 사용자가 입력한 데이터를 기반으로 새 블로그 게시물을 생성합니다.
+ */
+
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -34,8 +40,8 @@ import { PostingInsert } from "@/interface/blog.interface";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { PutBlobResult } from "@vercel/blob";
-import * as z from "zod";
 import { Label } from "@/components/ui/label";
+import * as z from "zod";
 
 const formSchema = z.object({
   titleKo: z.string(),
@@ -65,7 +71,6 @@ const RegistrationPage: React.FC = () => {
     }
 
     const file = inputFileRef.current.files[0];
-
     const response = await fetch(
       `/api/proverb/upload-thumbnail?filename=${file.name}`,
       {
@@ -75,7 +80,6 @@ const RegistrationPage: React.FC = () => {
     );
 
     const { url: thumbnailUrl } = (await response.json()) as PutBlobResult;
-
     const slug = values.titleEn
       .toLowerCase()
       .replace(/,/g, " ")

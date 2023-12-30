@@ -1,5 +1,14 @@
 "use client";
 
+/**
+ * 이 파일은 React와 TypeScript를 사용하여 웹사이트의 네비게이션 바를 구현합니다.
+ * 네비게이션 바는 홈, 여행, 속담 등의 항목을 포함하며, 각 항목을 클릭하면 해당 페이지로 이동합니다.
+ * 현재 페이지에 해당하는 항목은 다른 색상으로 표시됩니다.
+ *
+ * `Navbar` 함수는 네비게이션 바를 렌더링합니다.
+ * `NavItem` 함수는 각 네비게이션 항목을 렌더링합니다. 현재 페이지에 해당하는 항목에는 밑줄이 추가됩니다.
+ */
+
 import { motion, LayoutGroup } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { Suspense } from "react";
