@@ -3,6 +3,7 @@ import {
   Metadata,
   BlogPost,
   PostingInsert,
+  BlogComment,
 } from "@/interface/blog.interface";
 import { fetcher } from "@/lib/fetch";
 
@@ -61,6 +62,7 @@ export async function getPostingDetail(slug: string) {
   const data = await fetcher<BlogPost>("/blog/proverb/detail/" + slug);
 
   return {
+    postNo: data.postNo,
     title: `${data.titleJa} (${data.titleKo})`,
     titleJa: data.titleJa,
     titleKo: data.titleKo,
@@ -216,4 +218,30 @@ export async function translate(body: {
   });
 
   return data;
+}
+
+type AddComment = {
+  postNo: number;
+  comment: string;
+  id: string;
+  password?: string;
+};
+export async function addComment({
+  postNo,
+  comment,
+  id,
+  password,
+}: AddComment) {
+  return await fetcher<string>("/blog/proverb/comment", {
+    method: "put",
+    body: JSON.stringify({ postNo, comment, id, password }),
+    headers: { "Content-Type": "application/json" },
+  });
+}
+
+export async function getComment(postNo: number) {
+  return await fetcher<BlogComment[]>("/blog/proverb/comment/" + postNo, {
+    method: "get",
+    headers: { "Content-Type": "application/json" },
+  });
 }
