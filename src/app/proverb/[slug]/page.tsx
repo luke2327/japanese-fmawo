@@ -3,13 +3,13 @@ import { Suspense, cache } from "react";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "src/components/mdx";
 import { getViewsCount } from "src/app/db/queries";
-import ViewCounter from "../view-counter";
 import { increment } from "src/app/db/actions";
 import { blockingSprite, formatDate } from "src/lib/utils";
 import { config } from "@/lib/config";
 import { Comment } from "@/components/blog/comment";
 import { getPostingDetail } from "@/app/db/blog-client";
 import Share from "@/components/share";
+import ViewCounter from "../view-counter";
 
 const { host } = config;
 
@@ -31,6 +31,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.description,
+    keywords: post.tags || [post.titleKo, post.titleJa, post.titleEn].join(","),
     openGraph: {
       title: post.title,
       description: post.description,
