@@ -116,7 +116,7 @@ export default async function Blog({ params }) {
       <article className="prose prose-quoteless prose-neutral dark:prose-invert font-skybori">
         <CustomMDX source={post.contents} />
       </article>
-      <Comment />
+      <Comment postNo={post.postNo} />
     </section>
   );
 }
