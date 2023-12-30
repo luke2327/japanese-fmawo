@@ -6,7 +6,6 @@ export const config = {
   host: "https://app.maplew.com",
 };
 
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GOOGLE_ID;
 export const pageview = (url) => {
   window.gtag("config", GA_TRACKING_ID as string, {
     page_path: url,
