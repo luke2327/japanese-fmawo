@@ -5,3 +5,5 @@ export const config = {
       : "https://api.maplew.com/v2023",
   host: "https://blog.fmawo.com",
 };
+
+export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
