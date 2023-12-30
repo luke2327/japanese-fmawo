@@ -6,11 +6,16 @@
  * react-hook-form과 zod를 사용하여 폼 유효성 검사를 수행하고, 사용자가 입력한 데이터를 기반으로 새 블로그 게시물을 생성합니다.
  */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Popover,
   PopoverContent,
@@ -42,6 +47,7 @@ import { useForm } from "react-hook-form";
 import type { PutBlobResult } from "@vercel/blob";
 import { Label } from "@/components/ui/label";
 import * as z from "zod";
+import { LucideX } from "lucide-react";
 
 const formSchema = z.object({
   titleKo: z.string(),
@@ -64,6 +70,25 @@ const RegistrationPage: React.FC = () => {
       contents: "",
     },
   });
+
+  function reset() {
+    form.reset();
+    (inputFileRef.current as HTMLInputElement).files = null;
+    (inputFileRef.current as HTMLInputElement).value = "";
+  }
+
+  function onSubmitAfter() {
+    // 등록완료 토스트 메세지
+    toast({
+      title: "登録完了",
+      duration: 3000,
+    });
+
+    // 블로그 포스팅 정보 불러오기
+    initialize();
+    // 버튼 로딩 비활성화
+    setSubmitted(false);
+  }
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!inputFileRef.current?.files) {
@@ -118,45 +143,29 @@ const RegistrationPage: React.FC = () => {
     await addPosting(payload);
 
     // 리셋
-    form.reset();
-    inputFileRef.current.files = null;
-    inputFileRef.current.value = "";
+    reset();
 
-    // 등록완료 토스트 메세지
-    toast({
-      title: "登録完了",
-      description: values.titleJa,
-      duration: 3000,
-    });
-
-    // 블로그 포스팅 정보 불러오기
-    init();
-    // 버튼 로딩 비활성화
-    setSubmitted(false);
+    // 등록 후
+    onSubmitAfter();
   }
 
   const inputFileRef = useRef<HTMLInputElement>(null);
-
   const [submitted, setSubmitted] = useState(false);
-  const [useParse, setUseParse] = useState(false);
   const [postings, setPostings] = useState<
     Awaited<ReturnType<typeof getPostings>>
   >([]);
+  const [thumbnailData, setThumbnailData] = useState<string>();
   const { toast } = useToast();
 
-  const init = async () => {
+  const initialize = async () => {
     const postings = await getPostings();
 
     setPostings(postings);
   };
 
   useEffect(() => {
-    init();
+    initialize();
   }, []);
-
-  const handleUseParseChange = (e: boolean) => {
-    setUseParse(e);
-  };
 
   const translateTitleEnglish = async () => {
     const translatedText = await translate({
@@ -167,6 +176,22 @@ const RegistrationPage: React.FC = () => {
 
     form.setValue("titleEn", translatedText);
   };
+
+  const onChangePicture = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const file = event.currentTarget.files && event.currentTarget.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          setThumbnailData(e.target?.result as string);
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    [setThumbnailData]
+  );
 
   return (
     <section className="font-raleway">
@@ -215,6 +240,7 @@ const RegistrationPage: React.FC = () => {
                 <FormLabel className="flex items-center gap-2">
                   タイトル (英語)
                   <Button
+                    disabled={form.getValues("titleJa") === ""}
                     type="button"
                     className="py-0 text-[12px] h-5 px-2"
                     onClick={translateTitleEnglish}>
@@ -297,7 +323,31 @@ const RegistrationPage: React.FC = () => {
 
           <div>
             <Label>イメージ</Label>
-            <Input ref={inputFileRef} name="thumbnail" type="file" />
+            <Input
+              ref={inputFileRef}
+              onChange={onChangePicture}
+              name="thumbnail"
+              type="file"
+            />
+            {thumbnailData && (
+              <div className="mt-1 border dark:border-neutral-600 border-neutral-400 p-2 max-w-[200px] rounded-md flex flex-col items-end">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={thumbnailData}
+                  alt="Preview"
+                  className="h-full w-full max-w-[200px] max-h-[200px] rounded-md object-cover"
+                />
+                <button
+                  type="button"
+                  name="image-remove-button"
+                  className="pt-1">
+                  <LucideX
+                    strokeWidth={1}
+                    className="cursor-pointer text-neutral-400 hover:text-neutral-600 transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 "
+                  />
+                </button>
+              </div>
+            )}
           </div>
 
           <FormField
@@ -315,16 +365,6 @@ const RegistrationPage: React.FC = () => {
           />
 
           <div className="flex items-end justify-end gap-2">
-            <Checkbox
-              id="useParse"
-              checked={useParse}
-              onCheckedChange={handleUseParseChange}
-            />
-            <label
-              htmlFor="useParse"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              テンプレートを使用する
-            </label>
             <Button className="w-20" type="submit" disabled={submitted}>
               保存
             </Button>
