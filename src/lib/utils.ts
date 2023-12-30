@@ -1,5 +1,6 @@
 import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import * as z from "zod";
 
 export function formatDate(date: string, noFormattedDate: boolean = true) {
   const currentDate = new Date();
@@ -44,3 +45,19 @@ export function blockingSprite(slug: string) {
     throw "sprite.svg is blocked";
   }
 }
+
+const ACCEPTED_IMAGE_TYPES = [".jpg", ".jpeg", ".png"];
+
+export const assetForm = z.object({
+  file: z
+    .custom<FileList>()
+    .refine((fileList) => fileList.length === 1, "Expected file")
+    .transform((file) => file[0] as File)
+    .refine((file) => {
+      return file.size <= 10;
+    }, `File size should be less than 1gb.`)
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
+      "Only these types are allowed .jpg, .jpeg, .png, .webp and mp4"
+    ),
+});

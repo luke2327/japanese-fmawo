@@ -1,3 +1,10 @@
+/**
+ * 이 파일은 React와 TypeScript를 사용하여 MDX 컴포넌트를 커스터마이징합니다.
+ * MDX는 Markdown과 JSX를 결합한 것으로, 이를 통해 Markdown 내에서 React 컴포넌트를 사용할 수 있습니다.
+ * 이 파일에서는 테이블, 링크, 이미지, 콜아웃, ProsCard, ConsCard 등의 컴포넌트를 정의하고 있습니다.
+ * 또한, 각 헤딩 태그(h1~h6)에 대해 ID를 부여하고 링크를 생성하는 함수를 정의하고 있습니다.
+ */
+
 import Link from "next/link";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";

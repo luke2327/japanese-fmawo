@@ -144,14 +144,20 @@ type GetFormattedMDX = {
     titleJapanese: string;
   };
   slug: string;
+  thumbnailUrl: string;
 };
 
-export function getFormattedMDX({ contents, title, slug }: GetFormattedMDX) {
+export function getFormattedMDX({
+  contents,
+  title,
+  slug,
+  thumbnailUrl,
+}: GetFormattedMDX) {
   try {
     const englishTitle = capitalizeFirstLetter(title.titleEnglish) + ".";
     const image = `<Image
   alt={\`${title.titleJapanese} (${title.titleKorean}) | ${englishTitle}\`}
-  src={\`/images/${slug}/picture.jpg\`}
+  src={\`${thumbnailUrl}\`}
   width={1680}
   height={184}
 />\n`;

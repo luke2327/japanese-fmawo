@@ -24,7 +24,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "~/*": ["./public/*"]
-    }
+    },
+    "allowUnreachableCode": true
   },
   "include": [
     "next-env.d.ts",

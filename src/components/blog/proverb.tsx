@@ -1,3 +1,9 @@
+/**
+ * 이 파일은 React와 TypeScript를 사용하여 속담 페이지를 구현합니다.
+ * 이 페이지는 특정 키워드에 대한 게시물을 가져와서 각 게시물에 대한 링크를 생성합니다.
+ * 각 링크는 게시물의 썸네일, 제목, 그리고 게시 날짜를 보여줍니다.
+ */
+
 import { getPostings } from "@/app/db/blog-client";
 import Link from "next/link";
 import Image from "next/image";

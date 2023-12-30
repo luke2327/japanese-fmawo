@@ -20,6 +20,14 @@ const nextConfig = {
       permanent: !!permanent,
     }));
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "r9xadrbeeesxoulu.public.blob.vercel-storage.com",
+      },
+    ],
+  },
   headers() {
     return [
       {
