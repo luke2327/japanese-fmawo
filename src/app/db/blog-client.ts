@@ -1,7 +1,7 @@
 import {
   MDXData,
   Metadata,
-  Posting,
+  BlogPost,
   PostingInsert,
 } from "@/interface/blog.interface";
 import { fetcher } from "@/lib/fetch";
@@ -33,7 +33,7 @@ function extractTweetIds(content) {
 }
 
 export async function getPostings(keyword?: string | null) {
-  const datas = await fetcher<Posting[]>(
+  const datas = await fetcher<BlogPost[]>(
     `/blog/proverb/list${keyword ? `/${keyword}` : ""}`,
     { next: { revalidate: 60 } }
   );
@@ -58,12 +58,13 @@ export async function getPostings(keyword?: string | null) {
 }
 
 export async function getPostingDetail(slug: string) {
-  const data = await fetcher<Posting>("/blog/proverb/detail/" + slug);
+  const data = await fetcher<BlogPost>("/blog/proverb/detail/" + slug);
 
   return {
     title: `${data.titleJa} (${data.titleKo})`,
     titleJa: data.titleJa,
     titleKo: data.titleKo,
+    titleEn: data.titleEn,
     publishedAt: data.publishedAt,
     summary: data.titleEn,
     writer: data.writer,
@@ -74,6 +75,7 @@ export async function getPostingDetail(slug: string) {
     description: `${data.titleJa} | ${data.titleKo} | ${data.titleEn}`,
     contents: data.contents,
     slug: data.slug,
+    tags: data.tags,
   };
 }
 
@@ -142,14 +144,20 @@ type GetFormattedMDX = {
     titleJapanese: string;
   };
   slug: string;
+  thumbnailUrl: string;
 };
 
-export function getFormattedMDX({ contents, title, slug }: GetFormattedMDX) {
+export function getFormattedMDX({
+  contents,
+  title,
+  slug,
+  thumbnailUrl,
+}: GetFormattedMDX) {
   try {
     const englishTitle = capitalizeFirstLetter(title.titleEnglish) + ".";
     const image = `<Image
   alt={\`${title.titleJapanese} (${title.titleKorean}) | ${englishTitle}\`}
-  src={\`/images/${slug}/picture.jpg\`}
+  src={\`${thumbnailUrl}\`}
   width={1680}
   height={184}
 />\n`;
@@ -187,7 +195,7 @@ export function getFormattedMDX({ contents, title, slug }: GetFormattedMDX) {
 }
 
 export async function addPosting(body: PostingInsert) {
-  const data = await fetcher<Posting>("/blog/proverb/posting", {
+  const data = await fetcher<BlogPost>("/blog/proverb/posting", {
     method: "post",
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" },

@@ -17,14 +17,6 @@ export type Metadata = {
   thumbnailHeight?: string;
 };
 
-export type BlogPost = {
-  post_no: number;
-  contents: string;
-  language: "ko" | "ja";
-  slug: string;
-  type: "proverb";
-};
-
 export type MDXData = {
   metadata: Metadata;
   slug: string;
@@ -32,11 +24,14 @@ export type MDXData = {
   content: string;
 };
 
-export type Posting = {
+/**
+ * BlogPost Table structure
+ */
+export type BlogPost = {
   postNo: number;
   postIndex: number;
   contents: string;
-  language: "ko";
+  language: "ko" | "en";
   slug: string;
   type: "proverb";
   titleKo: string;
@@ -45,23 +40,33 @@ export type Posting = {
   writer: string;
   publishedAt: string;
   thumbnailUrl: string;
-  thumbnailWidth: 48;
-  thumbnailHeight: 48;
+  thumbnailWidth: number;
+  thumbnailHeight: number;
+  tags: string[];
 };
 
-export type PostingInsert = {
-  postIndex: number;
-  contents: string;
-  slug: string;
-  titleKo: string;
-  titleJa: string;
-  titleEn: string;
-  writer: string;
-  thumbnailUrl: string;
-  postNo?: number;
-  language?: "ko" | "en";
-  type?: "proverb";
-  publishedAt?: string;
-  thumbnailWidth?: number;
-  thumbnailHeight?: number;
-};
+export type PostingInsert = Required<
+  Pick<
+    BlogPost,
+    | "postIndex"
+    | "contents"
+    | "slug"
+    | "titleKo"
+    | "titleEn"
+    | "titleJa"
+    | "writer"
+    | "thumbnailUrl"
+  >
+> &
+  Partial<
+    Pick<
+      BlogPost,
+      | "postNo"
+      | "language"
+      | "type"
+      | "publishedAt"
+      | "thumbnailWidth"
+      | "thumbnailHeight"
+      | "tags"
+    >
+  >;
