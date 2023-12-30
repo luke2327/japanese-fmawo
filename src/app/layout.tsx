@@ -1,14 +1,14 @@
 import "./global.css";
 import type { Metadata, Viewport } from "next";
 import { Navbar } from "../components/nav";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { PreloadResources } from "./preload";
 import { Footer } from "../components/footer";
 import { config } from "@/lib/config";
 import localFont from "next/font/local";
 import { Raleway } from "next/font/google";
-import GoogleAnalytics from "@/components/google-analytics";
 import { Toaster } from "@/components/ui/toaster";
 
 const raleway = Raleway({
@@ -104,8 +104,9 @@ export default function RootLayout({
           <PreloadResources />
           <Footer />
         </main>
-        {/* Vercel 분석 */}
-        <Analytics />
+        {/* 분석도구 */}
+        <VercelAnalytics />
+        <GoogleAnalytics />
         {/* Shadcn 토스트 프로바이더 */}
         <Toaster />
       </body>
