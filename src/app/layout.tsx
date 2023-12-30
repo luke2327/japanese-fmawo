@@ -100,12 +100,13 @@ export default function RootLayout({
         <main className="flex-auto min-w-0 mt-4 flex flex-col px-2">
           <Navbar />
           {children}
-          <Analytics />
           <SpeedInsights />
           <PreloadResources />
           <Footer />
         </main>
-        <GoogleAnalytics />
+        {/* Vercel 분석 */}
+        <Analytics />
+        {/* Shadcn 토스트 프로바이더 */}
         <Toaster />
       </body>
     </html>
