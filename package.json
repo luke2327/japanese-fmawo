@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "@googleapis/youtube": "^13.0.0",
+    "@hookform/resolvers": "^3.3.3",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
@@ -20,6 +22,7 @@
     "@types/react": "18.2.38",
     "@types/react-dom": "18.2.17",
     "@vercel/analytics": "^1.1.1",
+    "@vercel/blob": "^0.16.1",
     "@vercel/postgres": "^0.5.1",
     "@vercel/speed-insights": "^0.0.5",
     "autoprefixer": "^10.4.16",
@@ -39,12 +42,14 @@
     "react": "18.2.0",
     "react-day-picker": "^8.10.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.49.2",
     "react-tweet": "^3.1.1",
     "sugar-high": "^0.5.3",
     "swr": "^2.2.4",
     "tailwind-merge": "^2.1.0",
     "tailwindcss": "^3.3.5",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "5.3.2"
+    "typescript": "5.3.2",
+    "zod": "^3.22.4"
   }
 }
