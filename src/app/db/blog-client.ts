@@ -225,16 +225,12 @@ type AddComment = {
   comment: string;
   id: string;
   password?: string;
+  cascadeCommentNo?: number;
 };
-export async function addComment({
-  postNo,
-  comment,
-  id,
-  password,
-}: AddComment) {
+export async function addComment(params: AddComment) {
   return await fetcher<string>("/blog/proverb/comment", {
     method: "put",
-    body: JSON.stringify({ postNo, comment, id, password }),
+    body: JSON.stringify(params),
     headers: { "Content-Type": "application/json" },
   });
 }
