@@ -35,7 +35,7 @@ function extractTweetIds(content) {
 
 export async function getPostings(keyword?: string | null) {
   const datas = await fetcher<BlogPost[]>(
-    `/blog/proverb/list${keyword ? `/${keyword}` : ""}`,
+    `/v2023/blog/proverb/list${keyword ? `/${keyword}` : ""}`,
     { next: { revalidate: 60 } }
   );
 
@@ -59,7 +59,7 @@ export async function getPostings(keyword?: string | null) {
 }
 
 export async function getPostingDetail(slug: string) {
-  const data = await fetcher<BlogPost>("/blog/proverb/detail/" + slug);
+  const data = await fetcher<BlogPost>("/v2023/blog/proverb/detail/" + slug);
 
   return {
     postNo: data.postNo,
@@ -197,7 +197,7 @@ export function getFormattedMDX({
 }
 
 export async function addPosting(body: PostingInsert) {
-  const data = await fetcher<BlogPost>("/blog/proverb/posting", {
+  const data = await fetcher<BlogPost>("/v2023/blog/proverb/posting", {
     method: "post",
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" },
@@ -211,7 +211,7 @@ export async function translate(body: {
   source: string;
   target: string;
 }) {
-  const data = await fetcher<string>("/language/translate", {
+  const data = await fetcher<string>("/v2023/language/translate", {
     method: "post",
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" },
@@ -228,7 +228,7 @@ type AddComment = {
   cascadeCommentNo?: number;
 };
 export async function addComment(params: AddComment) {
-  return await fetcher<string>("/blog/proverb/comment", {
+  return await fetcher<string>("/v2023/blog/proverb/comment", {
     method: "put",
     body: JSON.stringify(params),
     headers: { "Content-Type": "application/json" },
@@ -236,7 +236,7 @@ export async function addComment(params: AddComment) {
 }
 
 export async function getComment(postNo: number) {
-  return await fetcher<BlogComment[]>("/blog/proverb/comment/" + postNo, {
+  return await fetcher<BlogComment[]>("/v2023/blog/proverb/comment/" + postNo, {
     method: "get",
     headers: { "Content-Type": "application/json" },
   });
