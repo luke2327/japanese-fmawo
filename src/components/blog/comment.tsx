@@ -25,20 +25,34 @@ export function Comment({ postNo }: IProps) {
     });
   }, [postNo]);
 
-  async function dispatch() {
-    if (ref.current === null || idRef.current === null) {
-      return;
-    }
-
+  async function dispatchComment(
+    comment: string,
+    id: string,
+    password?: string,
+    cascadeCommentNo?: number
+  ) {
     await addComment({
       postNo,
-      comment: ref.current.value,
-      id: idRef.current.value,
-      password: passwordRef.current?.value,
+      comment,
+      id,
+      password,
+      cascadeCommentNo,
     });
     await getComment(postNo).then((res) => {
       setCommentList(res);
     });
+  }
+
+  async function handleSubmit() {
+    if (ref.current === null || idRef.current === null) {
+      return;
+    }
+
+    await dispatchComment(
+      ref.current.value,
+      idRef.current.value,
+      passwordRef.current?.value
+    );
 
     ref.current.value = "";
     idRef.current.value = "";
@@ -55,7 +69,7 @@ export function Comment({ postNo }: IProps) {
   return (
     <section className="mt-12 flex flex-col gap-2 font-skybori">
       <div className="flex justify-between items-end">
-        <Label htmlFor="comment" className="text-md">
+        <Label htmlFor="comment" className="text-md whitespace-nowrap">
           댓글
         </Label>
         <div className="flex justify-between gap-2">
@@ -77,9 +91,12 @@ export function Comment({ postNo }: IProps) {
       </div>
       <div className="grid w-full gap-2">
         <Textarea ref={ref} id="comment" className="w-full h-[80px]" />
-        <Button onClick={dispatch}>작성</Button>
+        <Button onClick={handleSubmit}>작성</Button>
       </div>
-      <CommentList commentList={commentList} />
+      <CommentList
+        commentList={commentList}
+        dispatchComment={dispatchComment}
+      />
     </section>
   );
 }

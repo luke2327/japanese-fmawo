@@ -18,7 +18,12 @@ export async function fetcher<T>(
   init?: RequestInit | undefined
 ): Promise<T> {
   console.log("\x1b[36mfetcher\x1b[0m", config.apiHost + url);
-  const res = await fetch(config.apiHost + url, init);
+  const res = await fetch(config.apiHost + url, {
+    ...init,
+    headers: init?.headers
+      ? { "Content-Type": "application/json", ...init.headers }
+      : { "Content-Type": "application/json" },
+  });
   const resJson = (await res.json()) as Response<T>;
 
   if (resJson.success) {
