@@ -22,14 +22,28 @@ import {
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 
-export function CommentList({ commentList }: { commentList: BlogComment[] }) {
-  const [cascadeId, setCascadeId] = useState<number>();
+type IProps = {
+  commentList: BlogComment[];
+  dispatchComment: (
+    comment: string,
+    id: string,
+    password?: string,
+    cascadeCommentNo?: number
+  ) => Promise<void>;
+};
+
+export function CommentList({ commentList, dispatchComment }: IProps) {
+  const [commentNo, setCommentNo] = useState<number>();
   const pathname = usePathname();
 
   function commentCopy(commentNo: number) {
     navigator.clipboard.writeText(
       `${config.host}${pathname}#comment-${commentNo}`
     );
+  }
+
+  function resetCommentNo() {
+    setCommentNo(undefined);
   }
 
   return (
@@ -70,10 +84,10 @@ export function CommentList({ commentList }: { commentList: BlogComment[] }) {
                       />
                       링크복사
                     </p>
-                    {cascadeId !== comment.commentNo && (
+                    {commentNo !== comment.commentNo && (
                       <p
                         className="cursor-pointer text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-100 transition-colors flex items-center gap-1"
-                        onClick={() => setCascadeId(comment.commentNo)}>
+                        onClick={() => setCommentNo(comment.commentNo)}>
                         <MessageSquareText
                           name="share-button"
                           type="button"
@@ -84,10 +98,10 @@ export function CommentList({ commentList }: { commentList: BlogComment[] }) {
                         답글
                       </p>
                     )}
-                    {cascadeId === comment.commentNo && (
+                    {commentNo === comment.commentNo && (
                       <p
                         className="cursor-pointer text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-100 transition-colors flex items-center gap-1"
-                        onClick={() => setCascadeId(undefined)}>
+                        onClick={resetCommentNo}>
                         <MessageSquareX
                           name="share-button"
                           type="button"
@@ -109,11 +123,11 @@ export function CommentList({ commentList }: { commentList: BlogComment[] }) {
                     return comment.commentNo === c.cascadeCommentNo;
                   })
                   .map((x) => (
-                    <div key={x.commentNo} className="ml-4 mt-2 flex gap-2">
+                    <div key={x.commentNo} className="mt-2 flex gap-2">
                       <CornerDownRight
                         strokeWidth={1}
                         size={16}
-                        className="text-neutral-600 dark:text-neutral-200"
+                        className="text-neutral-600 dark:text-neutral-200 mt-2"
                       />
                       <div>
                         <div className="flex items-end gap-2">
@@ -127,8 +141,13 @@ export function CommentList({ commentList }: { commentList: BlogComment[] }) {
                     </div>
                   ))}
               </p>
-              {cascadeId === comment.commentNo && (
-                <CommentCascade id={comment.id} commentNo={cascadeId} />
+              {commentNo === comment.commentNo && (
+                <CommentCascade
+                  id={comment.id}
+                  commentNo={commentNo}
+                  dispatchComment={dispatchComment}
+                  resetCommentNo={resetCommentNo}
+                />
               )}
             </div>
           );
@@ -137,12 +156,43 @@ export function CommentList({ commentList }: { commentList: BlogComment[] }) {
   );
 }
 
-function CommentCascade({ id, commentNo }: { id: string; commentNo: number }) {
+type IPropsCommentCascade = {
+  id: string;
+  commentNo: number;
+  dispatchComment: IProps["dispatchComment"];
+  resetCommentNo: () => void;
+};
+
+function CommentCascade({
+  id,
+  commentNo,
+  dispatchComment,
+  resetCommentNo,
+}: IPropsCommentCascade) {
   const ref = useRef<HTMLTextAreaElement>(null);
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  function dispatch() {}
+  function handleSubmit() {
+    if (ref.current === null || idRef.current === null) {
+      return;
+    }
+
+    dispatchComment(
+      ref.current.value,
+      idRef.current.value,
+      passwordRef.current?.value,
+      commentNo
+    );
+
+    ref.current.value = "";
+    idRef.current.value = "";
+    if (passwordRef.current !== null) {
+      passwordRef.current.value = "";
+    }
+
+    resetCommentNo();
+  }
 
   return (
     <section>
@@ -171,7 +221,7 @@ function CommentCascade({ id, commentNo }: { id: string; commentNo: number }) {
         </div>
         <div className="grid w-full gap-2">
           <Textarea ref={ref} id="comment" className="w-full h-[80px]" />
-          <Button onClick={dispatch}>작성</Button>
+          <Button onClick={handleSubmit}>작성</Button>
         </div>
       </div>
     </section>
