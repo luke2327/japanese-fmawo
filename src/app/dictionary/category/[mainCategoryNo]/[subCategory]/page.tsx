@@ -60,7 +60,7 @@ export default async function Page({ params: { subCategory } }: IProps) {
   }
 
   const data = await fetcher<SubCategoryDetailList>(
-    "/global-dict/category/sub/detail/" + subCategoryName
+    "/v2023/global-dict/category/sub/detail/" + subCategoryName
   );
 
   return (

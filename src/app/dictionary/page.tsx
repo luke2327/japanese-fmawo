@@ -20,7 +20,7 @@ export type DictionaryCategoryList = Record<
 
 export default async function Page() {
   const data = await fetcher<DictionaryCategoryList>(
-    "/global-dict/category/list"
+    "/v2023/global-dict/category/list"
   );
 
   return (

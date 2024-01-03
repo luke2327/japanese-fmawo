@@ -10,7 +10,7 @@ export async function generateMetadata({
 
   if (!isNaN(Number(params.mainCategoryNo))) {
     data = await fetcher(
-      "/global-dict/category/main/name/" + params.mainCategoryNo
+      "/v2023/global-dict/category/main/name/" + params.mainCategoryNo
     );
   } else {
     return;
@@ -54,7 +54,7 @@ export default async function Page({
 
   if (!isNaN(Number(params.mainCategoryNo))) {
     data = await fetcher(
-      "/global-dict/category/main/detail/" + params.mainCategoryNo
+      "/v2023/global-dict/category/main/detail/" + params.mainCategoryNo
     );
   } else {
     notFound();
