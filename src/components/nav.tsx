@@ -35,14 +35,18 @@ export function Navbar() {
       <div>
         <LayoutGroup>
           <nav
-            className="flex flex-row items-start relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
+            className="flex flex-row items-start justify-between relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
             id="nav">
-            <div className="flex flex-row space-x-0 pr-10">
+            <div className="flex flex-row space-x-0">
               <Suspense fallback={null}>
                 {Object.entries(navItems).map(([path, { name }]) => {
                   return <NavItem key={path} path={path} name={name} />;
                 })}
               </Suspense>
+            </div>
+            <div className="flex flex-row space-x-0">
+              <NavItem path="/auth/signup" name="Signup" />
+              <NavItem path="/auth/login" name="Login" />
             </div>
           </nav>
         </LayoutGroup>

@@ -69,7 +69,7 @@ export function Comment({ postNo }: IProps) {
   return (
     <section className="mt-12 flex flex-col gap-2 font-skybori">
       <div className="flex justify-between items-end">
-        <Label htmlFor="comment" className="text-md">
+        <Label htmlFor="comment" className="text-md whitespace-nowrap">
           댓글
         </Label>
         <div className="flex justify-between gap-2">
