@@ -18,18 +18,18 @@ const navItems = {
   "/": {
     name: "Home",
   },
-  "/journey": {
-    name: "Journey",
-  },
+  // "/journey": {
+  //   name: "Journey",
+  // },
   "/proverb": {
     name: "Proverb",
   },
   "/dictionary": {
     name: "Dictionary",
   },
-  "/contents": {
-    name: "Contents",
-  },
+  // "/contents": {
+  //   name: "Contents",
+  // },
 };
 
 export function Navbar() {
