@@ -50,12 +50,12 @@ import * as z from "zod";
 import { LucideX } from "lucide-react";
 
 const formSchema = z.object({
-  titleKo: z.string(),
-  titleJa: z.string(),
-  titleEn: z.string(),
-  writer: z.string(),
+  titleKo: z.string().min(1),
+  titleJa: z.string().min(1),
+  titleEn: z.string().min(1),
+  writer: z.string().min(1),
   publishedAt: z.date(),
-  contents: z.string(),
+  contents: z.string().min(1),
 });
 
 const RegistrationPage: React.FC = () => {
@@ -95,16 +95,22 @@ const RegistrationPage: React.FC = () => {
       throw new Error("No file selected");
     }
 
+    let thumbnailUrl = "";
     const file = inputFileRef.current.files[0];
-    const response = await fetch(
-      `/api/proverb/upload-thumbnail?filename=${file.name}`,
-      {
-        method: "POST",
-        body: file,
-      }
-    );
+    if (file) {
+      const response = await fetch(
+        `/api/proverb/upload-thumbnail?filename=${file.name}`,
+        {
+          method: "POST",
+          body: file,
+        }
+      );
 
-    const { url: thumbnailUrl } = (await response.json()) as PutBlobResult;
+      const { url } = (await response.json()) as PutBlobResult;
+
+      thumbnailUrl = url;
+    }
+
     const slug = values.titleEn
       .toLowerCase()
       .replace(/,/g, " ")
