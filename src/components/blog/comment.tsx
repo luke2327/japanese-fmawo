@@ -68,7 +68,7 @@ export function Comment({ postNo }: IProps) {
 
   return (
     <section className="mt-12 flex flex-col gap-2 font-skybori">
-      <div className="flex justify-between items-end">
+      <div className="flex justify-between items-end gap-2">
         <Label htmlFor="comment" className="text-md whitespace-nowrap">
           댓글
         </Label>
@@ -79,6 +79,7 @@ export function Comment({ postNo }: IProps) {
             placeholder="ID"
             required
             className="text-[12px] py-0.5 h-7"
+            maxLength={10}
           />
           <Input
             ref={passwordRef}
