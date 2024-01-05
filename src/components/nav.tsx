@@ -18,9 +18,9 @@ const navItems = {
   "/": {
     name: "Home",
   },
-  "/journey": {
-    name: "Journey",
-  },
+  // "/journey": {
+  //   name: "Journey",
+  // },
   "/proverb": {
     name: "Proverb",
   },
@@ -44,10 +44,10 @@ export function Navbar() {
                 })}
               </Suspense>
             </div>
-            <div className="flex flex-row space-x-0">
+            {/* <div className="flex flex-row space-x-0">
               <NavItem path="/auth/signup" name="Signup" />
               <NavItem path="/auth/login" name="Login" />
-            </div>
+            </div> */}
           </nav>
         </LayoutGroup>
       </div>

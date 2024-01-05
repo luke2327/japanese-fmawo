@@ -82,3 +82,7 @@ export type PostingInsert = Required<
       | "tags"
     >
   >;
+export type PostingEdit = Pick<
+  BlogPost,
+  "postNo" | "contents" | "titleKo" | "titleEn" | "titleJa" | "thumbnailUrl"
+>;
