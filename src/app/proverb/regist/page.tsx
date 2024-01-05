@@ -21,7 +21,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
+import { cn, getUUID } from "@/lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
@@ -73,8 +73,16 @@ const RegistrationPage: React.FC = () => {
 
   function reset() {
     form.reset();
-    (inputFileRef.current as HTMLInputElement).files = null;
-    (inputFileRef.current as HTMLInputElement).value = "";
+    thumbnailReset();
+  }
+
+  function thumbnailReset() {
+    setThumbnailData("");
+
+    if (inputFileRef.current) {
+      (inputFileRef.current as HTMLInputElement).files = null;
+      (inputFileRef.current as HTMLInputElement).value = "";
+    }
   }
 
   function onSubmitAfter() {
@@ -99,7 +107,9 @@ const RegistrationPage: React.FC = () => {
     const file = inputFileRef.current.files[0];
     if (file) {
       const response = await fetch(
-        `/api/proverb/upload-thumbnail?filename=${file.name}`,
+        `/api/proverb/upload-thumbnail?filename=${
+          getUUID() + file.name.split(".")[1]
+        }`,
         {
           method: "POST",
           body: file,
@@ -346,7 +356,8 @@ const RegistrationPage: React.FC = () => {
                 <button
                   type="button"
                   name="image-remove-button"
-                  className="pt-1">
+                  className="pt-1"
+                  onClick={thumbnailReset}>
                   <LucideX
                     strokeWidth={1}
                     className="cursor-pointer text-neutral-400 hover:text-neutral-600 transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 "
