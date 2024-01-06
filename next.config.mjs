@@ -37,7 +37,7 @@ const nextConfig = {
 };
 
 const ContentSecurityPolicy = `
-    default-src 'self' vercel.live googleads.g.doubleclick.net;
+    default-src 'self' vercel.live googleads.g.doubleclick.net tpc.googlesyndication.com www.google.com;
     script-src 'self' 'unsafe-eval' 'unsafe-inline' cdn.vercel-insights.com vercel.live va.vercel-scripts.com www.googletagmanager.com pagead2.googlesyndication.com tpc.googlesyndication.com;
     style-src 'self' 'unsafe-inline';
     img-src * blob: data:;
