@@ -27,7 +27,7 @@ export function formatDate(date: string, noFormattedDate: boolean = true) {
     formattedDate = "Today";
   }
 
-  const fullDate = targetDate.toLocaleString("ko-kr", {
+  const fullDate = targetDate.toLocaleString("en-us", {
     month: "long",
     day: "numeric",
     year: "numeric",
