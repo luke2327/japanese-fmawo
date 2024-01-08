@@ -4,6 +4,8 @@ import {
   BlogPost,
   PostingInsert,
   BlogComment,
+  PostingEdit,
+  Dashboard,
 } from "@/interface/blog.interface";
 import { fetcher } from "@/lib/fetch";
 
@@ -33,6 +35,7 @@ function extractTweetIds(content) {
   return tweetMatches?.map((tweet) => tweet.match(/[0-9]+/g)[0]) || [];
 }
 
+export type Posting = Awaited<ReturnType<typeof getPostings>>[0];
 export async function getPostings(keyword?: string | null) {
   const datas = await fetcher<BlogPost[]>(
     `/v2023/blog/proverb/list${keyword ? `/${keyword}` : ""}`,
@@ -44,6 +47,7 @@ export async function getPostings(keyword?: string | null) {
       title: `${data.titleJa} (${data.titleKo})`,
       titleJa: data.titleJa,
       titleKo: data.titleKo,
+      titleEn: data.titleEn,
       publishedAt: data.publishedAt,
       summary: data.titleEn,
       writer: data.writer,
@@ -54,6 +58,7 @@ export async function getPostings(keyword?: string | null) {
       description: `${data.titleJa} | ${data.titleKo} | ${data.titleEn}`,
       contents: data.contents,
       slug: data.slug,
+      postNo: data.postNo,
     };
   });
 }
@@ -198,7 +203,17 @@ export function getFormattedMDX({
 
 export async function addPosting(body: PostingInsert) {
   const data = await fetcher<BlogPost>("/v2023/blog/proverb/posting", {
-    method: "post",
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: { "Content-Type": "application/json" },
+  });
+
+  return data;
+}
+
+export async function editPosting(body: PostingEdit) {
+  const data = await fetcher<BlogPost>("/v2023/blog/proverb/posting", {
+    method: "PATCH",
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" },
   });
@@ -212,7 +227,7 @@ export async function translate(body: {
   target: string;
 }) {
   const data = await fetcher<string>("/v2023/language/translate", {
-    method: "post",
+    method: "POST",
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" },
   });
@@ -237,6 +252,13 @@ export async function addComment(params: AddComment) {
 
 export async function getComment(postNo: number) {
   return await fetcher<BlogComment[]>("/v2023/blog/proverb/comment/" + postNo, {
+    method: "get",
+    headers: { "Content-Type": "application/json" },
+  });
+}
+
+export async function dashboard() {
+  return await fetcher<Dashboard>("/v2023/blog/dashboard/", {
     method: "get",
     headers: { "Content-Type": "application/json" },
   });

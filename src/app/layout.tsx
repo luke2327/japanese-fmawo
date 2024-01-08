@@ -10,6 +10,7 @@ import { config } from "@/lib/config";
 import localFont from "next/font/local";
 import { Raleway } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
+import Script from "next/script";
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -107,6 +108,13 @@ export default function RootLayout({
         {/* 분석도구 */}
         <VercelAnalytics />
         <GoogleAnalytics />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2480550408149370"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+          id="adsbygoogle-init"
+        />
         {/* Shadcn 토스트 프로바이더 */}
         <Toaster />
       </body>

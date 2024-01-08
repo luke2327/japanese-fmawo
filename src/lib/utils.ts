@@ -27,7 +27,7 @@ export function formatDate(date: string, noFormattedDate: boolean = true) {
     formattedDate = "Today";
   }
 
-  const fullDate = targetDate.toLocaleString("ko-kr", {
+  const fullDate = targetDate.toLocaleString("en-us", {
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -61,3 +61,12 @@ export const assetForm = z.object({
       "Only these types are allowed .jpg, .jpeg, .png, .webp and mp4"
     ),
 });
+
+export const getUUID = () => {
+  return "xxx-xxxx-4xxx-yxxx".replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
+
+    return v.toString(16);
+  });
+};

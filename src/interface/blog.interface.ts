@@ -82,3 +82,17 @@ export type PostingInsert = Required<
       | "tags"
     >
   >;
+export type PostingEdit = Pick<
+  BlogPost,
+  "postNo" | "contents" | "titleKo" | "titleEn" | "titleJa" | "thumbnailUrl"
+>;
+export type Dashboard = {
+  dailyPost: (Pick<
+    BlogPost,
+    "postNo" | "titleKo" | "publishedAt" | "writer" | "thumbnailUrl" | "slug"
+  > & {
+    description: string;
+    thumbnailAlt: string;
+    commentList: BlogComment[];
+  })[];
+};

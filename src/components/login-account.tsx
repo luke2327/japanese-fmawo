@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { login } from "@/lib/api/auth";
 import Link from "next/link";
+import { setToken } from "@/lib/token";
 
 const formSchema = z.object({
   email: z.string().email().min(1),
@@ -35,7 +36,7 @@ export function LoginAccount() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const res = await login(values);
 
-    console.log(res);
+    setToken(res.accessToken, res.refreshToken);
   }
 
   return (

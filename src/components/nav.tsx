@@ -13,16 +13,17 @@ import { motion, LayoutGroup } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
+import { HomeIcon, icons } from "lucide-react";
 
-const navItems = {
+const navItems: Record<string, { name?: string; icon?: keyof typeof icons }> = {
   "/": {
-    name: "Home",
+    icon: "Home",
   },
   // "/journey": {
   //   name: "Journey",
   // },
   "/proverb": {
-    name: "Proverb",
+    name: "일본속담",
   },
   "/dictionary": {
     name: "Dictionary",
@@ -42,15 +43,17 @@ export function Navbar() {
             id="nav">
             <div className="flex flex-row space-x-0">
               <Suspense fallback={null}>
-                {Object.entries(navItems).map(([path, { name }]) => {
-                  return <NavItem key={path} path={path} name={name} />;
+                {Object.entries(navItems).map(([path, { name, icon }]) => {
+                  return (
+                    <NavItem key={path} path={path} name={name} icon={icon} />
+                  );
                 })}
               </Suspense>
             </div>
-            <div className="flex flex-row space-x-0">
+            {/* <div className="flex flex-row space-x-0">
               <NavItem path="/auth/signup" name="Signup" />
               <NavItem path="/auth/login" name="Login" />
-            </div>
+            </div> */}
           </nav>
         </LayoutGroup>
       </div>
@@ -60,7 +63,15 @@ export function Navbar() {
 
 let cx = (...classes) => classes.filter(Boolean).join(" ");
 
-function NavItem({ path, name }: { path: string; name: string }) {
+function NavItem({
+  path,
+  name,
+  icon,
+}: {
+  path: string;
+  name?: string;
+  icon?: keyof typeof icons;
+}) {
   let pathname = usePathname() || "/";
   if (pathname.includes("/proverb/")) {
     pathname = "/proverb";
@@ -75,7 +86,8 @@ function NavItem({ path, name }: { path: string; name: string }) {
         "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle",
         isActive ? "dark:text-neutral-200" : "text-neutral-500"
       )}>
-      <span className="relative py-1 px-2 text-lg">
+      <span className="relative py-1 px-2 text-lg flex items-center">
+        {icon && <Icon2 name={icon} />}
         {name}
         {path === pathname ? (
           <motion.div
@@ -92,3 +104,10 @@ function NavItem({ path, name }: { path: string; name: string }) {
     </Link>
   );
 }
+
+const Icon2 = ({ name }: { name: keyof typeof icons }) => {
+  console.log(1111, name);
+  const LucideIcon = icons[name];
+
+  return <LucideIcon size={16} />;
+};

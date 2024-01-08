@@ -8,7 +8,13 @@ export async function sendVerificationMail(params: sendVerificationMail) {
   });
 }
 
-export async function login(params: { email: string; password: string }) {
+export async function login(params: {
+  email: string;
+  password: string;
+}): Promise<{
+  accessToken: string;
+  refreshToken: string;
+}> {
   return await fetcher("/auth/login", {
     method: "post",
     body: JSON.stringify(params),

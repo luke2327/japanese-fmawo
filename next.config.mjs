@@ -5,20 +5,18 @@ const nextConfig = {
     ppr: true,
   },
   async redirects() {
-    if (!process.env.POSTGRES_URL) {
-      return [];
-    }
-
-    const { rows: redirects } = await sql`
-      SELECT source, destination, permanent
-      FROM redirects;
-    `;
-
-    return redirects.map(({ source, destination, permanent }) => ({
-      source,
-      destination,
-      permanent: !!permanent,
-    }));
+    return [
+      {
+        source: "/login",
+        destination: "/auth/login",
+        permanent: true,
+      },
+      {
+        source: "/signup",
+        destination: "/auth/signup",
+        permanent: true,
+      },
+    ];
   },
   images: {
     remotePatterns: [
@@ -39,13 +37,13 @@ const nextConfig = {
 };
 
 const ContentSecurityPolicy = `
-    default-src 'self' vercel.live;
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' cdn.vercel-insights.com vercel.live va.vercel-scripts.com www.googletagmanager.com;
+    default-src 'self' vercel.live googleads.g.doubleclick.net tpc.googlesyndication.com www.google.com;
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' cdn.vercel-insights.com vercel.live va.vercel-scripts.com www.googletagmanager.com pagead2.googlesyndication.com tpc.googlesyndication.com;
     style-src 'self' 'unsafe-inline';
     img-src * blob: data:;
     media-src 'none';
     connect-src *;
-    font-src 'self' data:;
+    font-src 'self' data: fonts.gstatic.com;
 `;
 
 const securityHeaders = [

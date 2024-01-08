@@ -36,7 +36,7 @@ async function ProverbPage({ keyword }: IProps) {
                 />
               </div>
             ) : (
-              <div className="min-w-[44.27px] w-[44.27px] h-[44.27px] border border-neutral-600 rounded-md"></div>
+              <div className="min-w-[68px] w-[68px] h-[68px] border border-neutral-600 rounded-md"></div>
             )}
             <div className="w-full flex flex-col min-h-[68px] justify-between">
               <p className="text-neutral-900 dark:text-neutral-100 tracking-tight flex flex-wrap items-center">

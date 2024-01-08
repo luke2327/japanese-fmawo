@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Page() {
+export default async function Page() {
   return (
     <section className="font-raleway">
       <h1 className="font-medium text-2xl mb-8 tracking-tighter">

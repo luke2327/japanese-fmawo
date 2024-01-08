@@ -57,8 +57,11 @@ export function CommentList({ commentList, dispatchComment }: IProps) {
               id={`comment-${comment.commentNo}`}
               className="mt-4">
               <div className="flex justify-between items-center">
-                <div className="flex items-end gap-2">
+                <div className="flex items-end gap-1 xs:gap-2">
                   <h4 className="text-md font-medium">{comment.id}</h4>
+                  <span className="text-xs text-neutral-600 dark:text-neutral-400">
+                    ({comment.ipAddress})
+                  </span>
                   <p className="text-xs text-neutral-600 dark:text-neutral-400">
                     {comment.createdAt}
                   </p>
@@ -118,10 +121,8 @@ export function CommentList({ commentList, dispatchComment }: IProps) {
               <p className="text-sm mt-1">
                 {comment.comment}
                 {commentList
-                  .filter((c) => {
-                    console.log(c.cascadeCommentNo);
-                    return comment.commentNo === c.cascadeCommentNo;
-                  })
+                  .filter((c) => comment.commentNo === c.cascadeCommentNo)
+                  .reverse()
                   .map((x) => (
                     <div key={x.commentNo} className="mt-2 flex gap-2">
                       <CornerDownRight
@@ -130,8 +131,11 @@ export function CommentList({ commentList, dispatchComment }: IProps) {
                         className="text-neutral-600 dark:text-neutral-200 mt-2"
                       />
                       <div>
-                        <div className="flex items-end gap-2">
+                        <div className="flex items-end gap-1 xs:gap-2">
                           <h4 className="text-md font-medium">{x.id}</h4>
+                          <span className="text-xs text-neutral-600 dark:text-neutral-400">
+                            ({comment.ipAddress})
+                          </span>
                           <p className="text-xs text-neutral-600 dark:text-neutral-400">
                             {x.createdAt}
                           </p>
@@ -198,7 +202,7 @@ function CommentCascade({
     <section>
       <div className="w-10"></div>
       <div className="flex flex-col gap-2 font-skybori">
-        <div className="flex justify-between items-end">
+        <div className="flex justify-between items-end gap-2">
           <Label htmlFor="comment" className="text-md">
             @{id}
           </Label>
@@ -209,6 +213,7 @@ function CommentCascade({
               placeholder="ID"
               required
               className="text-[12px] py-0.5 h-7"
+              maxLength={10}
             />
             <Input
               ref={passwordRef}
