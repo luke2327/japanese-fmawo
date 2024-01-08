@@ -5,6 +5,7 @@ import {
   PostingInsert,
   BlogComment,
   PostingEdit,
+  Dashboard,
 } from "@/interface/blog.interface";
 import { fetcher } from "@/lib/fetch";
 
@@ -251,6 +252,13 @@ export async function addComment(params: AddComment) {
 
 export async function getComment(postNo: number) {
   return await fetcher<BlogComment[]>("/v2023/blog/proverb/comment/" + postNo, {
+    method: "get",
+    headers: { "Content-Type": "application/json" },
+  });
+}
+
+export async function dashboard() {
+  return await fetcher<Dashboard>("/v2023/blog/dashboard/", {
     method: "get",
     headers: { "Content-Type": "application/json" },
   });
