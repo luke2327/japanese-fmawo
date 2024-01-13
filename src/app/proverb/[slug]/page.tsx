@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { Suspense, cache } from "react";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "src/components/mdx";
-import { getViewsCount } from "src/app/db/queries";
-import { increment } from "src/app/db/actions";
 import { blockingSprite, formatDate } from "src/lib/utils";
 import { config } from "@/lib/config";
 import { Comment } from "@/components/blog/comment";
 import { getPostingDetail } from "@/app/db/blog-client";
 import Share from "@/components/share";
-import ViewCounter from "../view-counter";
+import { Views } from "@/components/blog/views";
 
 const { host } = config;
 
@@ -58,8 +56,6 @@ export default async function Blog({ params }) {
 
   const post = await getPostingDetail(params.slug);
 
-  console.log("[post]", post);
-
   if (!post) {
     notFound();
   }
@@ -107,7 +103,7 @@ export default async function Blog({ params }) {
           </div>
           <div className="flex gap-2 items-center">
             <Suspense fallback={<p className="h-5" />}>
-              <Views slug={post.slug} />
+              <Views postNo={post.postNo} />
             </Suspense>
             <Share />
           </div>
@@ -121,10 +117,15 @@ export default async function Blog({ params }) {
   );
 }
 
-let incrementViews = cache(increment);
+// let incrementViews = cache(increment);
 
-async function Views({ slug }: { slug: string }) {
-  let views = await getViewsCount();
-  incrementViews(slug);
-  return <ViewCounter allViews={views} slug={slug} />;
-}
+// async function Views({ slug, views }: { slug: string; views: number }) {
+//   incrementViews(slug);
+//   getViewsCount();
+
+//   return (
+//     <p className="text-neutral-600 dark:text-neutral-400">
+//       {`${views?.toLocaleString()} views`}
+//     </p>
+//   );
+// }
