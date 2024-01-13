@@ -1,9 +1,9 @@
-import { sql } from "@vercel/postgres";
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
     ppr: true,
   },
+  reactStrictMode: false,
   async redirects() {
     return [
       {
