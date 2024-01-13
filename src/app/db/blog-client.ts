@@ -83,6 +83,11 @@ export async function getPostingDetail(slug: string) {
     contents: data.contents,
     slug: data.slug,
     tags: data.tags,
+    views: data.views,
+  } as Omit<BlogPost, "language" | "postIndex" | "type"> & {
+    title: string;
+    description: string;
+    summary: string;
   };
 }
 
@@ -262,4 +267,19 @@ export async function dashboard() {
     method: "get",
     headers: { "Content-Type": "application/json" },
   });
+}
+
+export async function increment(postNo: number) {
+  return await fetcher<{ views: number }>("/v2023/blog/proverb/views", {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ postNo }),
+  });
+
+  // await sql`
+  //   INSERT INTO views (slug, count)
+  //   VALUES (${slug}, 1)
+  //   ON CONFLICT (slug)
+  //   DO UPDATE SET count = views.count + 1
+  // `;
 }

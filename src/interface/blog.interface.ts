@@ -43,6 +43,7 @@ export type BlogPost = {
   thumbnailWidth: number;
   thumbnailHeight: number;
   tags: string[];
+  views: number;
 };
 
 export type BlogComment = {
