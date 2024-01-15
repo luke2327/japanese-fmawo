@@ -24,6 +24,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "r9xadrbeeesxoulu.public.blob.vercel-storage.com",
       },
+      {
+        protocol: "http",
+        hostname: "storage.fmawo.com",
+      },
     ],
   },
   headers() {
