@@ -61,7 +61,7 @@ export default async function Blog({ params }) {
   }
 
   return (
-    <section>
+    <>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -113,7 +113,7 @@ export default async function Blog({ params }) {
         <CustomMDX source={post.contents} />
       </article>
       <Comment postNo={post.postNo} />
-    </section>
+    </>
   );
 }
 
