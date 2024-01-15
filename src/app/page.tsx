@@ -4,10 +4,8 @@ import { DailyPost } from "@/components/daily-post";
 export default async function Page() {
   const dashboardDatas = await dashboard();
 
-  console.log(dashboardDatas);
-
   return (
-    <section>
+    <section className="max-w-xl flex flex-col justify-center mx-auto">
       <h1 className="font-medium text-2xl tracking-tighter flex gap-2 items-center flex-wrap">
         <span className="font-skybori">오늘의 일본속담</span>
       </h1>
