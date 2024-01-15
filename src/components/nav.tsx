@@ -14,6 +14,7 @@ import { usePathname } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
 import { HomeIcon, icons } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const navItems: Record<string, { name?: string; icon?: keyof typeof icons }> = {
   "/": {
@@ -24,15 +25,35 @@ const navItems: Record<string, { name?: string; icon?: keyof typeof icons }> = {
   // },
   "/proverb": {
     name: "일본속담",
+    icon: "BookMarked",
   },
   // "/dictionary": {
   //   name: "Dictionary",
   // },
+  "/guide": {
+    name: "일본가이드",
+    icon: "Compass",
+  },
 };
 
+const wideScreenPaths = ["/guide/public-holidays", "/guide/calendar"];
+
 export function Navbar() {
+  let pathname = usePathname() || "/";
+  if (pathname.includes("/proverb/")) {
+    pathname = "/proverb";
+  }
+
+  const maxWidth = wideScreenPaths.includes(pathname)
+    ? "max-w-[1000px]"
+    : "max-w-xl";
+
   return (
-    <aside className="-ml-[8px] mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10 py-2 font-skybori">
+    <aside
+      className={cn(
+        "max-w-xl w-full mx-auto flex justify-start mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10 py-2 font-skybori",
+        maxWidth
+      )}>
       <div>
         <LayoutGroup>
           <nav
@@ -80,15 +101,17 @@ function NavItem({
       key={path}
       href={path}
       className={cx(
-        "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle",
+        "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle gap-2",
         isActive ? "dark:text-neutral-200" : "text-neutral-500"
       )}>
-      <span className="relative py-1 px-2 text-lg flex items-center">
-        {icon && <Icon2 name={icon} />}
+      <span className="relative py-1 pr-3 text-lg flex items-center">
+        {icon && <Icon2 className="mr-2 top-[2px] relative" name={icon} />}
         {name}
         {path === pathname ? (
           <motion.div
-            className="mt-1 absolute h-[1px] top-7 mx-2 inset-0 bg-neutral-200 dark:bg-neutral-600 z-[-1] dark:bg-gradient-to-r from-transparent to-neutral-900"
+            className={
+              "mt-1 absolute h-[1px] top-7 mx-2 inset-0 bg-neutral-200 dark:bg-neutral-600 z-[-1] dark:bg-gradient-to-r from-transparent to-neutral-900"
+            }
             layoutId="sidebar"
             transition={{
               type: "spring",
@@ -102,9 +125,14 @@ function NavItem({
   );
 }
 
-const Icon2 = ({ name }: { name: keyof typeof icons }) => {
-  console.log(1111, name);
+const Icon2 = ({
+  name,
+  className,
+}: {
+  name: keyof typeof icons;
+  className: string;
+}) => {
   const LucideIcon = icons[name];
 
-  return <LucideIcon size={16} />;
+  return <LucideIcon className={className} size={16} />;
 };
