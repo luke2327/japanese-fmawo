@@ -28,7 +28,7 @@ export function DailyPost({ key, post }: IProps) {
       key={key}
       className="flex flex-col items-center justify-center w-full py-2">
       <Link href={`/proverb/${post.slug}`}>
-        <Card className="w-full max-w-2xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-colors duration-300">
+        <Card className="w-full max-w-xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-colors duration-300">
           {/* 상단 */}
           <CardHeader className="p-3 xs:p-4 xs:pb-0 pb-0">
             <CardTitle className="text-2xl font-bold font-skybori">
@@ -66,7 +66,7 @@ export function DailyPost({ key, post }: IProps) {
 
       {/* 댓글란 */}
       {post.commentList.length > 0 && (
-        <div className="w-full max-w-2xl mt-4">
+        <div className="w-full max-w-xl mt-4">
           <h2 className="text-lg font-semibold">Comments</h2>
           <div className="mt-2 space-y-4">
             {post.commentList.map((comment) => (
