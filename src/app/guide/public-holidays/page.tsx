@@ -7,9 +7,7 @@ export const metadata = {
 export default function Page() {
   return (
     <section>
-      <div
-        id="guide-page"
-        className="max-w-[1000px] w-full mx-auto font-skybori">
+      <div id="guide-page" className="max-w-xl w-full mx-auto font-skybori">
         <h1 className="text-xl mb-4 md:text-2xl">일본의 공휴일</h1>
         <h2 className="text-lg">특징</h2>
         <hr className="my-1" />
