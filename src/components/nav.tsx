@@ -44,9 +44,7 @@ export function Navbar() {
     pathname = "/proverb";
   }
 
-  const maxWidth = wideScreenPaths.includes(pathname)
-    ? "max-w-[1000px]"
-    : "max-w-xl";
+  const maxWidth = wideScreenPaths.includes(pathname) ? "max-w-xl" : "max-w-xl";
 
   return (
     <aside
@@ -91,6 +89,7 @@ function NavItem({
   icon?: keyof typeof icons;
 }) {
   let pathname = usePathname() || "/";
+
   if (pathname.includes("/proverb/")) {
     pathname = "/proverb";
   }
@@ -109,9 +108,10 @@ function NavItem({
         {name}
         {path === pathname ? (
           <motion.div
-            className={
-              "mt-1 absolute h-[1px] top-7 mx-2 inset-0 bg-neutral-200 dark:bg-neutral-600 z-[-1] dark:bg-gradient-to-r from-transparent to-neutral-900"
-            }
+            className={cx(
+              "mt-1 absolute h-[1px] top-7 mx-2 inset-0 bg-neutral-200 dark:bg-neutral-600",
+              "z-[-1] dark:bg-gradient-to-r from-transparent to-neutral-900"
+            )}
             layoutId="sidebar"
             transition={{
               type: "spring",
