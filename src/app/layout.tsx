@@ -86,15 +86,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="ko"
-      className={cx(
-        "text-black bg-white dark:text-white dark:bg-[#111010] font-azuki",
-        raleway.variable,
-        azuki.variable,
-        skybori.variable
-      )}>
-      <body className="antialiased mb-4 flex flex-col md:flex-row mx-1 lg:mx-auto">
+    <html lang="ko">
+      <body
+        className={cx(
+          "antialiased mb-4 flex flex-col md:flex-row mx-1 lg:mx-auto",
+          "text-black bg-white dark:text-white dark:bg-[#111010] font-azuki",
+          raleway.variable,
+          azuki.variable,
+          skybori.variable
+        )}>
         <main className="flex-auto min-w-0 mt-4 flex flex-col px-2">
           <Navbar />
           {children}
