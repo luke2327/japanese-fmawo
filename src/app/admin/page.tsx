@@ -1,24 +1,8 @@
-import { auth } from "src/app/auth";
-import { getGuestbookEntries } from "src/app/db/queries";
-import { redirect } from "next/navigation";
-import Form from "./form";
-
-export const metadata = {
-  title: "Admin",
-};
-
-export default async function GuestbookPage() {
-  let session = await auth();
-  if (session?.user?.email !== "ark.luke2327@gmail.com") {
-    redirect("/");
-  }
-
-  let entries = await getGuestbookEntries();
-
+export default function AdminPage() {
   return (
-    <section>
-      <h1 className="font-medium text-2xl mb-8 tracking-tighter">admin</h1>
-      <Form entries={entries} />
-    </section>
+    <div className="pt-8 gap-4 flex flex-col justify-center items-center min-h-[40vh] tracking-widest">
+      <h1 className="text-2xl">今個人専用の管理画面を作成中です。</h1>
+      <h2>完成まで今しばらくお待ちくださいませ</h2>
+    </div>
   );
 }
