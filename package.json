@@ -1,4 +1,6 @@
 {
+  "name": "chamomile",
+  "homepage": "https://fmawo.com",
   "private": true,
   "scripts": {
     "dev": "next dev --port 3002 --turbo",
@@ -38,7 +40,7 @@
     "framer-motion": "^10.16.5",
     "geist": "1.1.0",
     "lucide-react": "^0.302.0",
-    "next": "^14.0.5-canary.17",
+    "next": "^14.1.1-canary.52",
     "next-auth": "5.0.0-beta.3",
     "next-mdx-remote": "^4.4.1",
     "postcss": "^8.4.31",
