@@ -196,7 +196,7 @@ function EditionPage() {
   }
 
   return (
-    <section className="font-raleway">
+    <>
       {selectedPost && (
         <div className="flex justify-between items-center">
           <Button
@@ -340,7 +340,7 @@ function EditionPage() {
       ) : (
         <BlogAuthentication onChangeAuthentication={onChangeAuthentication} />
       )}
-    </section>
+    </>
   );
 }
 
