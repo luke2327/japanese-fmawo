@@ -1,6 +1,6 @@
 import "./global.css";
 import type { Metadata, Viewport } from "next";
-import { Navbar } from "../components/nav";
+import Nav from "../components/nav";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -95,8 +95,8 @@ export default function RootLayout({
           azuki.variable,
           skybori.variable
         )}>
-        <main className="flex-auto min-w-0 mt-4 flex flex-col px-2">
-          <Navbar />
+        <main className="flex-auto min-w-0 flex flex-col px-2">
+          <Nav />
           {children}
           <SpeedInsights />
           <PreloadResources />
