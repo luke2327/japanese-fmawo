@@ -1,3 +1,4 @@
+import InformationBanner from "@/components/blog/information-banner";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,6 +20,12 @@ export const metadata: Metadata = {
 export default function InfoOsaka() {
   return (
     <div>
+      <InformationBanner
+        src={"/images/information/information-4.jpg"}
+        alt={
+          "부산에 부산 사투리가 있듯이 오사카에는 오사카 사투리(관서 사투리)가있습니다..."
+        }
+      />
       {/* header */}
       <div></div>
       <h1 className="text-3xl">같은 말이라도 오사카에서는 의미가 다른 표현</h1>

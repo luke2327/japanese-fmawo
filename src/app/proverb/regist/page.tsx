@@ -210,7 +210,7 @@ const RegistrationPage: React.FC = () => {
   );
 
   return (
-    <section className="font-raleway">
+    <>
       <h1 className="mb-2 text-lg">新しい投稿（{postings.length + 1}番目）</h1>
       <Form {...form}>
         <form
@@ -388,7 +388,7 @@ const RegistrationPage: React.FC = () => {
           </div>
         </form>
       </Form>
-    </section>
+    </>
   );
 };
 

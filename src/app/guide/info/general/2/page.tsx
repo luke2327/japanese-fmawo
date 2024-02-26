@@ -1,3 +1,4 @@
+import InformationBanner from "@/components/blog/information-banner";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -20,6 +21,10 @@ export const metadata: Metadata = {
 export default function InfoOsaka() {
   return (
     <div>
+      <InformationBanner
+        src={"/images/information/information-2.jpg"}
+        alt={"인생에 교훈이 되는 20가지 일본 속담 2"}
+      />
       {/* header */}
       <div></div>
       <h1 className="text-xl sm:text-2xl">
