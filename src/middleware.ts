@@ -6,8 +6,10 @@ export async function middleware(request: NextRequest) {
   const accessAdmin = request.nextUrl.pathname === "/admin";
   const accessAdminLogin = request.nextUrl.pathname === "/admin/login";
   const accessAdminDashboard = request.nextUrl.pathname === "/admin/dashboard";
+  const accessAdminWork = request.nextUrl.pathname.startsWith("/admin/work");
+  const blockPaths = accessAdmin || accessAdminDashboard || accessAdminWork;
 
-  if (!accessToken && (accessAdmin || accessAdminDashboard)) {
+  if (!accessToken && blockPaths) {
     return NextResponse.redirect(new URL("/admin/login", request.url));
   } else if (accessToken && (accessAdmin || accessAdminLogin)) {
     return NextResponse.redirect(new URL("/admin/dashboard", request.url));
