@@ -156,14 +156,12 @@ type GetFormattedMDX = {
     titleEnglish: string;
     titleJapanese: string;
   };
-  slug: string;
   thumbnailUrl: string;
 };
 
 export function getFormattedMDX({
   contents,
   title,
-  slug,
   thumbnailUrl,
 }: GetFormattedMDX) {
   try {

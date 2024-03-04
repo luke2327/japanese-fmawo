@@ -17,9 +17,6 @@ export function Footer() {
               <li className="text-neutral-400 dark:hover:text-white transition-colors cursor-pointer">
                 Fmawo
               </li>
-              <li>
-                <Image src="logo/1.svg" width={100} height={100} alt="alt" />
-              </li>
               <li className="text-neutral-400 dark:hover:text-white transition-colors cursor-pointer">
                 Mail
               </li>

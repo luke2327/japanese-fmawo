@@ -21,17 +21,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn, getUUID } from "@/lib/utils";
+import { cn, makeSlug, uploadThumbnail } from "@/lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { useToast } from "@/components/ui/use-toast";
-import {
-  addPosting,
-  getFormattedMDX,
-  getPostings,
-  translate,
-} from "@/app/db/blog-client";
+import { addPosting, getPostings, translate } from "@/app/db/blog-client";
 import {
   Form,
   FormControl,
@@ -70,7 +65,6 @@ const formSchema = z.object({
 const thumbnailPrefix = "http://storage.fmawo.com/proverb/thumbnail";
 
 const RegistrationPage: React.FC = () => {
-  const { role } = useUserInfo();
   const { mNo } = useUserInfo();
   const { allMemberInfo } = useSupervisorInfo();
   const [file, setFile] = useState<File | null>(null);
@@ -119,56 +113,12 @@ const RegistrationPage: React.FC = () => {
       throw new Error("No file selected");
     }
 
-    const slug = values.titleEn
-      .toLowerCase()
-      .replace(/,/g, " ")
-      .replace(/\s\s/g, " ")
-      .split(" ")
-      .join("-");
+    const slug = makeSlug(values.titleEn);
 
     let thumbnailUrl = "";
 
     if (file) {
-      const uuid = getUUID();
-      const fileExt = file.name.split(".")[1];
-      const response = await fetch(`/api/proverb/upload-thumbnail`, {
-        headers: { "Content-Type": "image/jpeg" },
-        method: "POST",
-        body: JSON.stringify({
-          uuid,
-          slug,
-          fileExt,
-          contentType: `image/${fileExt === "jpg" ? "jpeg" : fileExt}`,
-        }),
-      });
-
-      const { url, fields } = await response.json();
-      const formData = new FormData();
-      Object.entries(fields).forEach(([key, value]) => {
-        formData.append(key, value as string);
-      });
-      formData.append("file", file);
-
-      await fetch(url, { method: "POST", body: formData });
-
-      thumbnailUrl = thumbnailPrefix + `/${slug}/${uuid}.${fileExt}`;
-    }
-
-    let mdx = "";
-
-    try {
-      mdx = getFormattedMDX({
-        contents: values.contents,
-        slug,
-        title: {
-          titleEnglish: values.titleEn,
-          titleJapanese: values.titleJa,
-          titleKorean: values.titleKo,
-        },
-        thumbnailUrl,
-      }) as string;
-    } catch (e) {
-      console.error(e);
+      thumbnailUrl = await uploadThumbnail(file, slug, thumbnailPrefix);
     }
 
     const payload: PostingInsert = {
@@ -179,7 +129,7 @@ const RegistrationPage: React.FC = () => {
       worker: values.worker,
       check: false,
       workMember: mNo,
-      contents: mdx,
+      contents: values.contents,
       publishedAt: format(values.publishedAt as Date, "yyyy-MM-dd HH:mm:SS"),
       slug,
       postIndex: postings.length + 1,
