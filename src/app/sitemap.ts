@@ -31,5 +31,41 @@ export default async function sitemap(): Promise<Sitemap> {
     })
   );
 
-  return [...routes, ...blogs];
+  return [...routes, ...blogs, ...dialects, ...dialectsInfo];
 }
+
+const dialects: Sitemap = [
+  {
+    url: `${config.host}/dialects`,
+    changeFrequency: "weekly",
+    priority: 0.7,
+  },
+  {
+    url: `${config.host}/dialects/public-holidays`,
+    changeFrequency: "weekly",
+    priority: 0.7,
+  },
+];
+
+const dialectsInfo: Sitemap = [
+  "chubu/1",
+  "chugoku/1",
+  "hokkaido/1",
+  "kansai/1",
+  "kanto/1",
+  "kyushu/1",
+  "shikoku/1",
+  "tohoku/1",
+  "general/1",
+  "general/2",
+  "general/3",
+  "general/4",
+  "osaka/1",
+  "osaka/2",
+  "osaka/3",
+  "japanese-dialects/1",
+].map((slug) => ({
+  url: `${config.host}/dialects/info/${slug}`,
+  changeFrequency: "weekly",
+  priority: 0.8,
+}));

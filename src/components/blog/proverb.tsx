@@ -9,6 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { formatDate } from "@/lib/utils";
 import React from "react";
+import AnimateItems from "@/components/animate/animate-items";
 
 type IProps = {
   keyword?: string | null;
@@ -18,8 +19,12 @@ async function ProverbPage({ keyword }: IProps) {
   const posts = await getPostings(keyword);
 
   return (
-    <div>
-      {posts.map((post) => (
+    <AnimateItems
+      staggerOnFirstLoadOnly
+      animateOnFirstLoadOnly
+      duration={0.3}
+      scaleOffset={0.95}
+      items={posts.map((post) => (
         <Link
           key={post.slug}
           className="flex flex-col space-y-1 mb-4"
@@ -47,13 +52,13 @@ async function ProverbPage({ keyword }: IProps) {
                 {formatDate(post.publishedAt, false)}
               </p>
               {/* <Suspense fallback={<p className="h-6" />}>
-                  <Views slug={post.slug} />
-                </Suspense> */}
+                <Views slug={post.slug} />
+              </Suspense> */}
             </div>
           </div>
         </Link>
       ))}
-    </div>
+    />
   );
 }
 

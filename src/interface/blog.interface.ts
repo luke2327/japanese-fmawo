@@ -44,6 +44,8 @@ export type BlogPost = {
   thumbnailHeight: number;
   tags: string[];
   views: number;
+  check: boolean;
+  workMember?: number;
 };
 
 export type BlogComment = {
@@ -58,7 +60,7 @@ export type BlogComment = {
   ipAddress: string;
 };
 
-export type PostingInsert = Required<
+export type PostingInsert = { worker?: string } & Required<
   Pick<
     BlogPost,
     | "postIndex"
@@ -69,6 +71,8 @@ export type PostingInsert = Required<
     | "titleJa"
     | "writer"
     | "thumbnailUrl"
+    | "workMember"
+    | "check"
   >
 > &
   Partial<
@@ -85,7 +89,14 @@ export type PostingInsert = Required<
   >;
 export type PostingEdit = Pick<
   BlogPost,
-  "postNo" | "contents" | "titleKo" | "titleEn" | "titleJa" | "thumbnailUrl"
+  | "postNo"
+  | "contents"
+  | "titleKo"
+  | "titleEn"
+  | "titleJa"
+  | "thumbnailUrl"
+  | "workMember"
+  | "check"
 >;
 export type Dashboard = {
   dailyPost: (Pick<
@@ -96,4 +107,10 @@ export type Dashboard = {
     thumbnailAlt: string;
     commentList: BlogComment[];
   })[];
+};
+export type WorkInfo = {
+  workPosts: BlogPost[];
+  total: number;
+  compelete: number;
+  incomplete: number;
 };

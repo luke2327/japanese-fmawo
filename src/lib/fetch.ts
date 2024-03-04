@@ -32,6 +32,7 @@ export async function fetcher<T>(
   const resJson = (await res.json()) as Response<T>;
 
   if (resJson.success) {
+    console.log(resJson);
     return resJson.result;
   }
 

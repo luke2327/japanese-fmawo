@@ -6,6 +6,7 @@ import {
   BlogComment,
   PostingEdit,
   Dashboard,
+  WorkInfo,
 } from "@/interface/blog.interface";
 import { fetcher } from "@/lib/fetch";
 
@@ -84,7 +85,7 @@ export async function getPostingDetail(slug: string) {
     slug: data.slug,
     tags: data.tags,
     views: data.views,
-  } as Omit<BlogPost, "language" | "postIndex" | "type"> & {
+  } as Omit<BlogPost, "language" | "postIndex" | "type" | "check"> & {
     title: string;
     description: string;
     summary: string;
@@ -231,7 +232,7 @@ export async function translate(body: {
   source: string;
   target: string;
 }) {
-  const data = await fetcher<string>("/v2023/language/translate", {
+  const data = await fetcher<string>("/v2023/language/translateMicrosoft", {
     method: "POST",
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" },
@@ -266,6 +267,14 @@ export async function dashboard() {
   return await fetcher<Dashboard>("/v2023/blog/dashboard/", {
     method: "get",
     headers: { "Content-Type": "application/json" },
+  });
+}
+
+export async function getWorkInfo() {
+  return await fetcher<WorkInfo>("/v2023/blog/proverb/work", {
+    method: "get",
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
   });
 }
 

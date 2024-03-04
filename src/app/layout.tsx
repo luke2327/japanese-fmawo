@@ -89,7 +89,7 @@ export default function RootLayout({
     <html lang="ko">
       <body
         className={cx(
-          "antialiased mb-4 flex flex-col md:flex-row mx-1 lg:mx-auto",
+          "antialiased mb-4 flex flex-col md:flex-row !mx-0 !px-0 lg:mx-auto",
           "text-black bg-white dark:text-white dark:bg-[#111010] font-azuki",
           raleway.variable,
           azuki.variable,

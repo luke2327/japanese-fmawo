@@ -1,4 +1,5 @@
 import InformationBanner from "@/components/blog/information-banner";
+import InformationDescription from "@/components/blog/information-description";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -21,13 +22,13 @@ export default function InfoOsaka() {
   return (
     <div>
       <InformationBanner
-        src={"/images/information/information-1.jpg"}
+        src={"/images/information/osaka/1.png"}
         alt={
           "부산에 부산 사투리가 있듯이 오사카에는 오사카 사투리(관서 사투리)가있습니다..."
         }
       />
       {/* header */}
-      <div className="relative z-10 bg-white dark:bg-[#111010]">
+      <InformationDescription>
         <h1 className="text-3xl">알아두면 좋은 오사카 사투리</h1>
         <hr className="mt-2 mb-4"></hr>
         <p className="mb-4">
@@ -154,7 +155,7 @@ export default function InfoOsaka() {
           </p>
           <p>특히 장사하는 사람들이 많이 사용되고 있습니다. </p>
         </div>
-      </div>
+      </InformationDescription>
     </div>
   );
 }

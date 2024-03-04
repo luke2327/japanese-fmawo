@@ -1,3 +1,5 @@
+import AnimateWrapper from "@/components/blog/animate-wrapper";
+import InformationRecommend from "@/components/blog/information-recommend";
 import { cx } from "class-variance-authority";
 
 export default function InfoLayout({
@@ -9,7 +11,10 @@ export default function InfoLayout({
     <section
       id="info-page"
       className={cx("max-w-xl w-full mx-auto font-skybori tracking-wider")}>
-      {children}
+      <AnimateWrapper>
+        {children}
+        <InformationRecommend />
+      </AnimateWrapper>
     </section>
   );
 }

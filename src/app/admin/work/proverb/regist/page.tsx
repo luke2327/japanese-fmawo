@@ -44,21 +44,36 @@ import {
 import { PostingInsert } from "@/interface/blog.interface";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import type { PutBlobResult } from "@vercel/blob";
 import { Label } from "@/components/ui/label";
 import * as z from "zod";
 import { LucideX } from "lucide-react";
+import useSupervisorInfo from "@/hooks/useSupervisorInfo";
+import useUserInfo from "@/hooks/useUserInfo";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import Image from "next/image";
 
 const formSchema = z.object({
   titleKo: z.string().min(1),
   titleJa: z.string().min(1),
   titleEn: z.string().min(1),
   writer: z.string().min(1),
+  worker: z.string().min(1),
   publishedAt: z.date(),
   contents: z.string().min(1),
 });
+const thumbnailPrefix = "http://storage.fmawo.com/proverb/thumbnail";
 
 const RegistrationPage: React.FC = () => {
+  const { role } = useUserInfo();
+  const { mNo } = useUserInfo();
+  const { allMemberInfo } = useSupervisorInfo();
+  const [file, setFile] = useState<File | null>(null);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -66,6 +81,7 @@ const RegistrationPage: React.FC = () => {
       titleJa: "",
       titleEn: "",
       writer: "Maria",
+      worker: "",
       publishedAt: new Date(),
       contents: "",
     },
@@ -103,30 +119,41 @@ const RegistrationPage: React.FC = () => {
       throw new Error("No file selected");
     }
 
-    let thumbnailUrl = "";
-    const file = inputFileRef.current.files[0];
-    if (file) {
-      const response = await fetch(
-        `/api/proverb/upload-thumbnail?filename=${
-          getUUID() + file.name.split(".")[1]
-        }`,
-        {
-          method: "POST",
-          body: file,
-        }
-      );
-
-      const { url } = (await response.json()) as PutBlobResult;
-
-      thumbnailUrl = url;
-    }
-
     const slug = values.titleEn
       .toLowerCase()
       .replace(/,/g, " ")
       .replace(/\s\s/g, " ")
       .split(" ")
       .join("-");
+
+    let thumbnailUrl = "";
+
+    if (file) {
+      const uuid = getUUID();
+      const fileExt = file.name.split(".")[1];
+      const response = await fetch(`/api/proverb/upload-thumbnail`, {
+        headers: { "Content-Type": "image/jpeg" },
+        method: "POST",
+        body: JSON.stringify({
+          uuid,
+          slug,
+          fileExt,
+          contentType: `image/${fileExt === "jpg" ? "jpeg" : fileExt}`,
+        }),
+      });
+
+      const { url, fields } = await response.json();
+      const formData = new FormData();
+      Object.entries(fields).forEach(([key, value]) => {
+        formData.append(key, value as string);
+      });
+      formData.append("file", file);
+
+      await fetch(url, { method: "POST", body: formData });
+
+      thumbnailUrl = thumbnailPrefix + `/${slug}/${uuid}.${fileExt}`;
+    }
+
     let mdx = "";
 
     try {
@@ -149,12 +176,17 @@ const RegistrationPage: React.FC = () => {
       titleEn: values.titleEn,
       titleJa: values.titleJa,
       writer: values.writer,
+      worker: values.worker,
+      check: false,
+      workMember: mNo,
       contents: mdx,
       publishedAt: format(values.publishedAt as Date, "yyyy-MM-dd HH:mm:SS"),
       slug,
       postIndex: postings.length + 1,
       thumbnailUrl,
     };
+
+    console.log(payload);
 
     await addPosting(payload);
 
@@ -195,9 +227,10 @@ const RegistrationPage: React.FC = () => {
 
   const onChangePicture = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      const file = event.currentTarget.files && event.currentTarget.files[0];
+      const file = event.target.files && event.target.files[0];
 
       if (file) {
+        setFile(file);
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -273,22 +306,59 @@ const RegistrationPage: React.FC = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="writer"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>投稿者</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormDescription className="dark:text-neutral-400">
-                  例：「Maria」
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="grid grid-cols-12 gap-2">
+            <div className="col-span-12 sm:col-span-6">
+              <FormField
+                control={form.control}
+                name="writer"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>投稿者</FormLabel>
+                    <FormControl>
+                      <Input {...field} defaultValue={field.value} />
+                    </FormControl>
+                    <FormDescription className="dark:text-neutral-400">
+                      例：「Maria」
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-12 sm:col-span-6">
+              <FormField
+                control={form.control}
+                name="worker"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>作業者</FormLabel>
+                    <Select onValueChange={field.onChange}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="作業者" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {allMemberInfo.map((member) => (
+                          <SelectItem
+                            key={member.mNo}
+                            value={member.mNo.toString()}
+                            className="font-skybori flex">
+                            {member.id}{" "}
+                            <span className="text-neutral-500 text-xs self-end">
+                              ({member.role})
+                            </span>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+
           <FormField
             control={form.control}
             name="publishedAt"
@@ -344,13 +414,15 @@ const RegistrationPage: React.FC = () => {
               onChange={onChangePicture}
               name="thumbnail"
               type="file"
+              accept="image/*, video/*"
             />
             {thumbnailData && (
-              <div className="mt-1 border dark:border-neutral-600 border-neutral-400 p-2 max-w-[200px] rounded-md flex flex-col items-end">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="mt-1 aspect-square w-full border dark:border-neutral-600 border-neutral-400 p-2 max-w-[200px] rounded-md flex flex-col items-end">
+                <Image
                   src={thumbnailData}
                   alt="Preview"
+                  width={200}
+                  height={200}
                   className="h-full w-full max-w-[200px] max-h-[200px] rounded-md object-cover"
                 />
                 <button
