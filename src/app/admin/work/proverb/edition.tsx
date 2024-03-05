@@ -31,6 +31,7 @@ import {
 import useUserInfo from "@/hooks/useUserInfo";
 import { Progress } from "@/components/ui/progress";
 import { motion } from "framer-motion";
+import DownloadLink from "@/components/download-link";
 
 type AdminPostEditionProps = {
   post: BlogPost;
@@ -219,24 +220,30 @@ export default function AdminPostEdition({
             />
           )}
           {mutation.thumbnailUrl && (
-            <div className="mt-1 aspect-square w-full border dark:border-neutral-600 p-2 max-w-full sm:max-w-[200px] rounded-md flex flex-col items-end">
-              <Image
-                src={mutation.thumbnailUrl}
-                alt="Preview"
-                width={200}
-                height={200}
-                className="h-full w-full max-w-full max-h-full sm:max-w-[200px] sm:max-h-[200px] rounded-md object-cover"
-              />
-              <button
-                type="button"
-                name="image-remove-button"
-                className="pt-1"
-                onClick={thumbnailReset}>
-                <LucideX
-                  strokeWidth={1}
-                  className="cursor-pointer text-neutral-400 hover:text-neutral-600 transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 "
+            <div className="flex flex-col gap-2">
+              <div className="mt-1 aspect-square w-full border dark:border-neutral-600 p-2 max-w-full sm:max-w-[200px] rounded-md flex flex-col items-end">
+                <Image
+                  src={mutation.thumbnailUrl}
+                  alt="Preview"
+                  width={200}
+                  height={200}
+                  className="h-full w-full max-w-full max-h-full sm:max-w-[200px] sm:max-h-[200px] rounded-md object-cover"
                 />
-              </button>
+              </div>
+              <div className="grid grid-cols-12 gap-2">
+                <DownloadLink
+                  url={mutation.thumbnailUrl}
+                  className="col-span-6 sm:col-span-4 flex items-center gap-1"
+                />
+                <Button
+                  type="button"
+                  name="image-remove-button"
+                  className="col-span-6 sm:col-span-4 flex items-center gap-1"
+                  onClick={thumbnailReset}>
+                  イメージ削除
+                  <LucideX strokeWidth={1.7} size={16} />
+                </Button>
+              </div>
             </div>
           )}
         </div>
