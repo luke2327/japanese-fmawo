@@ -30,15 +30,15 @@ const navItems: Record<string, { name?: string; icon?: keyof typeof icons }> = {
   // "/dictionary": {
   //   name: "Dictionary",
   // },
-  "/guide": {
-    name: "일본가이드",
+  "/dialects": {
+    name: "일본방언",
     icon: "Compass",
   },
 };
 
 const wideScreenPaths = ["/guide/public-holidays", "/guide/calendar"];
 
-export function Navbar() {
+export default function Nav() {
   let pathname = usePathname() || "/";
   if (pathname.includes("/proverb/")) {
     pathname = "/proverb";
@@ -49,8 +49,7 @@ export function Navbar() {
   return (
     <aside
       className={cn(
-        "max-w-xl w-full mx-auto flex justify-start mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10 py-2 font-skybori",
-        maxWidth
+        "max-w-full sm:max-w-xl w-full sm:mx-auto flex justify-start mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10 py-2 font-skybori"
       )}>
       <div>
         <LayoutGroup>

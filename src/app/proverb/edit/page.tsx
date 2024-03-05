@@ -130,6 +130,7 @@ function EditionPage() {
       titleEn: mutation.titleEn,
       titleJa: mutation.titleJa,
       contents: mutation.contents,
+      check: true,
       thumbnailUrl,
     };
 

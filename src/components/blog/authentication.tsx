@@ -20,7 +20,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { ADMIN_ID, ADMIN_PASSWORD } from "@/lib/config";
+import { fetcher } from "@/lib/fetch";
+import { setToken } from "@/lib/token";
+import { useRouter } from "next/navigation";
+import useUserInfo from "@/hooks/useUserInfo";
+import useSupervisorInfo from "@/hooks/useSupervisorInfo";
+import { AllMemberInfo, Login } from "@/interface/auth.interface";
+import { getWorkInfo } from "@/app/db/blog-client";
 
 const formSchema = z.object({
   email: z.string().min(1),
@@ -30,8 +36,11 @@ const formSchema = z.object({
 export function BlogAuthentication({
   onChangeAuthentication,
 }: {
-  onChangeAuthentication: (val: boolean) => void;
+  onChangeAuthentication?: (val: boolean) => void;
 }) {
+  const { setUserInfo, setWorkInfo, ...all } = useUserInfo();
+  const { setSupervisorInfo } = useSupervisorInfo();
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,17 +50,44 @@ export function BlogAuthentication({
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (values.email === ADMIN_ID && values.password === ADMIN_PASSWORD) {
-      onChangeAuthentication(true);
+    const result = await fetcher<Login>("/v2023/blog/login", {
+      method: "POST",
+      body: JSON.stringify({
+        id: values.email,
+        password: values.password,
+      }),
+    });
+
+    setToken(result.accessToken, result.refreshToken);
+    setUserInfo({
+      id: result.id,
+      mNo: result.mNo,
+      rules: result.rules,
+      role: result.role,
+    });
+
+    const workInfo = await getWorkInfo();
+    setWorkInfo(workInfo);
+
+    if (result.role === "supervisor") {
+      const allMemberInfo = await fetcher<AllMemberInfo>(
+        "/v2023/blog/allMemberInfo",
+        {
+          method: "POST",
+        }
+      );
+
+      setSupervisorInfo({ allMemberInfo });
     }
+
+    router.push("/admin/dashboard");
   }
 
   return (
-    <Card className="max-w-md w-full mx-4">
+    <Card className="max-w-md w-full mt-10">
       <CardHeader>
         <CardTitle className="text-black dark:text-white">Login</CardTitle>
       </CardHeader>
-
       <CardContent>
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
@@ -60,7 +96,7 @@ export function BlogAuthentication({
               control={form.control}
               render={({ field }) => (
                 <FormItem className="space-y-1">
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>ID</FormLabel>
                   <FormControl>
                     <Input
                       {...field}

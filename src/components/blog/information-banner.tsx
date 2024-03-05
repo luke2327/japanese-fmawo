@@ -13,7 +13,7 @@ export default function InformationBanner({
       width={960}
       height={300}
       alt={alt}
-      className="object-cover w-[960px] h-[300px] rounded-md mb-2"
+      className="shadow-2xl sticky top-[52px] object-cover w-[960px] h-[200px] sm:h-[300px] rounded-md mb-2 transition-all"
     />
   );
 }

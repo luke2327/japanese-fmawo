@@ -1,4 +1,5 @@
 import { fetcher } from "@/lib/fetch";
+import cookie from "react-cookies";
 
 type sendVerificationMail = { email: string; password: string; name: string };
 export async function sendVerificationMail(params: sendVerificationMail) {
@@ -19,4 +20,9 @@ export async function login(params: {
     method: "post",
     body: JSON.stringify(params),
   });
+}
+
+export async function removeCookies() {
+  cookie.remove("accessToken", { path: "/" });
+  cookie.remove("refreshToken", { path: "/" });
 }
