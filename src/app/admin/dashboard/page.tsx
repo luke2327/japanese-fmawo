@@ -8,6 +8,7 @@ import { LogOutIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function AdminPage() {
   const router = useRouter();
@@ -24,7 +25,11 @@ export default function AdminPage() {
   return loading ? (
     <Loading />
   ) : (
-    <div className="gap-4 flex flex-col w-screen tracking-widest">
+    <motion.div
+      className="gap-4 flex flex-col w-screen tracking-widest"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}>
       <div className="flex justify-between items-center">
         <p className="text-2xl">{userInfo.id}さん</p>
         <p
@@ -65,6 +70,6 @@ export default function AdminPage() {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
