@@ -76,6 +76,9 @@ export const metadata: Metadata = {
     title: "MW",
     card: "summary_large_image",
   },
+  verification: {
+    yandex: "0d36be2ea539a1a3",
+  },
 };
 
 const cx = (...classes) => classes.filter(Boolean).join(" ");

@@ -1,12 +1,9 @@
 import { dashboard } from "@/app/db/blog-client";
 import AnimateItems from "@/components/animate/animate-items";
-import AnimateWrapper from "@/components/blog/animate-wrapper";
 import { DailyPost } from "@/components/daily-post";
 
 export default async function Page() {
   const dashboardDatas = await dashboard();
-
-  console.log(dashboardDatas);
 
   return (
     <section className="max-w-xl flex flex-col justify-center mx-auto">

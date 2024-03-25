@@ -27,8 +27,11 @@ const navItems: Record<string, { name?: string; icon?: keyof typeof icons }> = {
     name: "일본속담",
     icon: "BookMarked",
   },
-  // "/dictionary": {
-  //   name: "Dictionary",
+  "/dictionary": {
+    name: "Dictionary",
+  },
+  // "/contents": {
+  //   name: "Contents",
   // },
   "/dialects": {
     name: "일본방언",

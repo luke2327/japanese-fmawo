@@ -12,6 +12,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "types": ["@types/gtag.js"],
     "jsx": "preserve",
     "baseUrl": ".",
     "incremental": true,

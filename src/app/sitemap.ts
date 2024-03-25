@@ -11,6 +11,7 @@
 
 import { getPostings } from "@/app/db/blog-client";
 import { config } from "@/lib/config";
+import dictionarySitemap from "@/constant/dictionary.sitemap";
 import type { MetadataRoute } from "next";
 
 type Sitemap = MetadataRoute.Sitemap;
@@ -22,16 +23,24 @@ export default async function sitemap(): Promise<Sitemap> {
     changeFrequency: "weekly",
     priority: 0.8,
   }));
+  const dictionary: MetadataRoute.Sitemap = dictionarySitemap.map((url) => ({
+    url,
+    lastModified: "2023-12-25",
+  }));
 
-  const routes: Sitemap = ["", "/proverb", "/uses", "/journey"].map(
-    (route) => ({
-      url: config.host + route,
-      lastModified: new Date().toISOString().split("T")[0],
-      priority: 1,
-    })
-  );
+  const routes: Sitemap = [
+    "",
+    "/proverb",
+    "/uses",
+    "/journey",
+    "/dictionary",
+    "/contents",
+  ].map((route) => ({
+    url: config.host + route,
+    lastModified: new Date().toISOString().split("T")[0],
+  }));
 
-  return [...routes, ...blogs, ...dialects, ...dialectsInfo];
+  return [...routes, ...blogs, ...dialects, ...dialectsInfo, ...dictionary];
 }
 
 const dialects: Sitemap = [
