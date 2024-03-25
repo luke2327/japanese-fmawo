@@ -11,7 +11,12 @@ type Props = {
 
 export default function DownloadLink({ url, className }: Props) {
   async function download() {
-    const res = await fetch(url);
+    const [, ...splitUrl] = url.split("/");
+    const res = await fetch(
+      url.includes("storage.fmawo.com")
+        ? "https://s3.ap-northeast-2.amazonaws.com" + splitUrl.join("/")
+        : url
+    );
     const blob = await res.blob();
     const downloadLink = window.URL.createObjectURL(blob);
     const a = document.createElement("a");

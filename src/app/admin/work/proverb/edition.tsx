@@ -99,14 +99,15 @@ export default function AdminPostEdition({
     let contents = mutation.contents;
     let check = false;
 
+    // 새로운 파일이 업로드 되었을 경우
+    if (file) {
+      thumbnailUrl = await uploadThumbnail(file, slug, thumbnailPrefix);
+      setProgress(30);
+    }
+
     if (send) {
       check = true;
 
-      // 새로운 파일이 업로드 되었을 경우
-      if (file) {
-        thumbnailUrl = await uploadThumbnail(file, slug, thumbnailPrefix);
-        setProgress(30);
-      }
       try {
         contents = getFormattedMDX({
           contents,
