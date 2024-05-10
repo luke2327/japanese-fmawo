@@ -22,8 +22,6 @@ export async function generateMetadata({
     return;
   }
 
-  console.log(mainCategoryName, subCategoryName);
-
   const ogImage = `https://app.maplew.com/og?title=${mainCategoryName}-${subCategoryName}`;
   const description = `${mainCategoryName} | ${subCategoryName}`;
 
@@ -75,9 +73,9 @@ export default async function Page({ params: { subCategory } }: IProps) {
       </div>
       <Divider />
       <table
-        className="text-[12px] w-full table table-fixed max-w-full border-neutral-600 border p-0.5"
+        className="text-[12px] w-full table table-fixed max-w-full border-neutral-400 dark:border-neutral-600 border p-0.5"
         border={1}>
-        <thead className="bg-neutral-600 w-full table-header-group">
+        <thead className="bg-neutral-200 dark:bg-neutral-600 w-full table-header-group">
           <tr>
             <th className="w-[20%]">韓国語単語</th>
             <th className="w-[30%] hidden md:table-cell">韓国語発音</th>
@@ -109,7 +107,7 @@ function Td({ val, className }: { val: string; className: string }) {
     <td
       style={{ textWrap: "pretty" }}
       className={cn(
-        "border-neutral-600 border-t border-l px-2.5 py-1.5",
+        "border-neutral-400 dark:border-neutral-600 border-t border-l px-2.5 py-1.5",
         className
       )}>
       {val}

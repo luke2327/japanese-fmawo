@@ -66,7 +66,7 @@ export default async function Page({
         <h1 className="text-[20px] font-bold">{data.mainCategoryName}</h1>
         <p className="text-neutral-400">（{data.mainCategoryWordCount}）</p>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 p-2 border-neutral-600 border">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 p-2 border-neutral-400 dark:border-neutral-600 border">
         {data.mainCategoryList.map((x, idx) => (
           <Link
             key={idx}

@@ -24,7 +24,7 @@ export default async function Page() {
   );
 
   return (
-    <section id="dictionary">
+    <section id="dictionary" className="sm:max-w-xl mx-auto">
       <MainCategory dictionaryCategoryList={data} />
     </section>
   );

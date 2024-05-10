@@ -7,8 +7,8 @@ type IProps = {
 
 export function MainCategory({ dictionaryCategoryList }: IProps) {
   return (
-    <div className="border-neutral-600 border">
-      <div className="text-center bg-neutral-600 m-0.5 py-0.5">
+    <div className="dark:border-neutral-600 border">
+      <div className="text-center bg-neutral-200 dark:bg-neutral-600 m-0.5 py-0.5">
         韓国語のカテゴリー
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-3">

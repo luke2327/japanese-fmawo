@@ -13,7 +13,7 @@ import { motion, LayoutGroup } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
-import { HomeIcon, icons } from "lucide-react";
+import { icons } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems: Record<string, { name?: string; icon?: keyof typeof icons }> = {
@@ -28,7 +28,8 @@ const navItems: Record<string, { name?: string; icon?: keyof typeof icons }> = {
     icon: "BookMarked",
   },
   "/dictionary": {
-    name: "Dictionary",
+    name: "일본사전",
+    icon: "BookOpenText",
   },
   // "/contents": {
   //   name: "Contents",
