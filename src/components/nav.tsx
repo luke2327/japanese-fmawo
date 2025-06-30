@@ -27,10 +27,10 @@ const navItems: Record<string, { name?: string; icon?: keyof typeof icons }> = {
     name: "일본속담",
     icon: "BookMarked",
   },
-  "/dictionary": {
-    name: "일본사전",
-    icon: "BookOpenText",
-  },
+  // "/dictionary": {
+  //   name: "일본사전",
+  //   icon: "BookOpenText",
+  // },
   // "/contents": {
   //   name: "Contents",
   // },
@@ -54,12 +54,14 @@ export default function Nav() {
     <aside
       className={cn(
         "max-w-full sm:max-w-xl w-full sm:mx-auto flex justify-start mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10 py-2 font-skybori"
-      )}>
+      )}
+    >
       <div>
         <LayoutGroup>
           <nav
             className="flex flex-row items-start justify-between relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
-            id="nav">
+            id="nav"
+          >
             <div className="flex flex-row space-x-0">
               <Suspense fallback={null}>
                 {Object.entries(navItems).map(([path, { name, icon }]) => {
@@ -105,7 +107,8 @@ function NavItem({
       className={cx(
         "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle gap-2",
         isActive ? "dark:text-neutral-200" : "text-neutral-500"
-      )}>
+      )}
+    >
       <span className="relative py-1 pr-3 text-lg flex items-center">
         {icon && <Icon2 className="mr-2 top-[2px] relative" name={icon} />}
         {name}

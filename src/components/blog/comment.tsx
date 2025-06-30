@@ -68,7 +68,7 @@ export function Comment({ postNo }: IProps) {
 
   return (
     <section className="mt-12 flex flex-col gap-2 font-skybori">
-      <div className="flex justify-between items-end gap-2">
+      <div className="flex justify-between items-end gap-2 hidden">
         <Label htmlFor="comment" className="text-md whitespace-nowrap">
           댓글
         </Label>
@@ -80,6 +80,7 @@ export function Comment({ postNo }: IProps) {
             required
             className="text-[12px] py-0.5 h-7"
             maxLength={10}
+            disabled
           />
           <Input
             ref={passwordRef}
@@ -87,12 +88,15 @@ export function Comment({ postNo }: IProps) {
             maxLength={10}
             id="password"
             className="text-[12px] py-0.5 h-7"
+            disabled
           />
         </div>
       </div>
       <div className="grid w-full gap-2">
-        <Textarea ref={ref} id="comment" className="w-full h-[80px]" />
-        <Button onClick={handleSubmit}>작성</Button>
+        <Textarea ref={ref} id="comment" className="w-full h-[80px]" disabled />
+        <Button onClick={handleSubmit} disabled>
+          작성
+        </Button>
       </div>
       <CommentList
         commentList={commentList}

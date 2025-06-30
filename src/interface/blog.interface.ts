@@ -31,6 +31,7 @@ export type BlogPost = {
   postNo: number;
   postIndex: number;
   contents: string;
+  contentsEn?: string;
   language: "ko" | "en";
   slug: string;
   type: "proverb";
@@ -39,10 +40,11 @@ export type BlogPost = {
   titleEn: string;
   writer: string;
   publishedAt: string;
+  lastModifiedAt?: string;
   thumbnailUrl: string;
   thumbnailWidth: number;
   thumbnailHeight: number;
-  tags: string[];
+  tags?: string[];
   views: number;
   check: boolean;
   workMember?: number;
@@ -99,10 +101,7 @@ export type PostingEdit = Pick<
   | "check"
 >;
 export type Dashboard = {
-  dailyPost: (Pick<
-    BlogPost,
-    "postNo" | "titleKo" | "publishedAt" | "writer" | "thumbnailUrl" | "slug"
-  > & {
+  dailyPost: (BlogPost & {
     description: string;
     thumbnailAlt: string;
     commentList: BlogComment[];

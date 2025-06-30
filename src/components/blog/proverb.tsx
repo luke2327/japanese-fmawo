@@ -28,7 +28,8 @@ async function ProverbPage({ keyword }: IProps) {
         <Link
           key={post.slug}
           className="flex flex-col space-y-1 mb-4"
-          href={`/proverb/${post.slug}`}>
+          href={`/proverb/${post.slug}`}
+        >
           <div className="flex items-center gap-2">
             {post.thumbnailUrl ? (
               <div>

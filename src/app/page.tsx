@@ -13,7 +13,7 @@ export default async function Page() {
       <div className="prose-neutral dark:prose-invert flex-col flex items-start gap-2 font-raleway">
         <AnimateItems
           scaleOffset={1}
-          items={dashboardDatas.dailyPost.reverse().map((post) => (
+          items={dashboardDatas.dailyPost.map((post) => (
             <DailyPost key={post.postNo} post={post} />
           ))}
         />

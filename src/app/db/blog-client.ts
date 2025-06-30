@@ -1,3 +1,6 @@
+import { blogComment } from "@/constant/blog-comment";
+import { blogPost } from "@/constant/blog-post";
+import { blogPostDaily, blogRandomPost } from "@/constant/blog-post-daily";
 import {
   MDXData,
   Metadata,
@@ -38,10 +41,17 @@ function extractTweetIds(content) {
 
 export type Posting = Awaited<ReturnType<typeof getPostings>>[0];
 export async function getPostings(keyword?: string | null) {
-  const datas = await fetcher<BlogPost[]>(
-    `/v2023/blog/proverb/list${keyword ? `/${keyword}` : ""}`,
-    { next: { revalidate: 60 } }
-  );
+  const decodedKeyword = decodeURIComponent(keyword || "");
+  console.log('키워드', decodedKeyword);
+  // const datas = await fetcher<BlogPost[]>(
+  //   `/v2023/blog/proverb/list${keyword ? `/${keyword}` : ""}`,
+  //   { next: { revalidate: 60 } }
+  // );
+  const datas = keyword ?
+    blogPost.filter((post) => post.titleKo.includes(decodedKeyword) || post.titleJa.includes(decodedKeyword)) :
+    blogPost;
+
+  console.log("datas", datas);
 
   return datas.map((data) => {
     return {
@@ -65,7 +75,8 @@ export async function getPostings(keyword?: string | null) {
 }
 
 export async function getPostingDetail(slug: string) {
-  const data = await fetcher<BlogPost>("/v2023/blog/proverb/detail/" + slug);
+  // const data = await fetcher<BlogPost>("/v2023/blog/proverb/detail/" + slug);
+  const data = blogPost.find((post => post.slug === slug)) as BlogPost;
 
   return {
     postNo: data.postNo,
@@ -255,17 +266,30 @@ export async function addComment(params: AddComment) {
 }
 
 export async function getComment(postNo: number) {
-  return await fetcher<BlogComment[]>("/v2023/blog/proverb/comment/" + postNo, {
-    method: "get",
-    headers: { "Content-Type": "application/json" },
-  });
+  const comment = blogComment.filter((comment => comment.postNo === postNo));
+  return comment as BlogComment[];
+  // return await fetcher<BlogComment[]>("/v2023/blog/proverb/comment/" + postNo, {
+  //   method: "get",
+  //   headers: { "Content-Type": "application/json" },
+  // });
 }
 
 export async function dashboard() {
-  return await fetcher<Dashboard>("/v2023/blog/dashboard/", {
-    method: "get",
-    headers: { "Content-Type": "application/json" },
+  const dailyPost = blogPostDaily.map((post) => {
+    const commentList = blogComment.filter((comment) => comment.postNo === post.postNo);
+    console.log("댓글", commentList);
+    return {
+      ...post,
+      commentList: commentList,
+    } as Dashboard['dailyPost'][number];
   });
+
+  return { dailyPost } as Dashboard;
+
+  // return await fetcher<Dashboard>("/v2023/blog/dashboard/", {
+  //   method: "get",
+  //   headers: { "Content-Type": "application/json" },
+  // });
 }
 
 export async function getWorkInfo() {
@@ -277,11 +301,14 @@ export async function getWorkInfo() {
 }
 
 export async function increment(postNo: number) {
-  return await fetcher<{ views: number }>("/v2023/blog/proverb/views", {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ postNo }),
-  });
+  const post = blogPost.find((post) => post.postNo === postNo) as BlogPost;
+
+  return post
+  // return await fetcher<{ views: number }>("/v2023/blog/proverb/views", {
+  //   method: "PATCH",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({ postNo }),
+  // });
 
   // await sql`
   //   INSERT INTO views (slug, count)

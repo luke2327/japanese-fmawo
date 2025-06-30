@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f828aac7-ab6f-4919-8576-56040d01f031" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/formatContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/formatContent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/proverb/upload-thumbnail/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/post/upload-thumbnail/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/db/blog-client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/db/blog-client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/proverb/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/post/[slug]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/proverb/edit/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/post/edit/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/proverb/edit/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/post/edit/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/proverb/keyword/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/post/keyword/[slug]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/proverb/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/post/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/proverb/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/post/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/proverb/regist/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/post/regist/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/proverb/regist/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/post/regist/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/proverb/view-counter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/post/view-counter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sitemap.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sitemap.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blog/keyword-search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blog/keyword-search.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blog/proverb-dev.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blog/post-dev.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blog/proverb.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blog/post.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/daily-post.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/daily-post.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login-account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login-account.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/001-roman-way-story-korean.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/002-monkeys-fall-from-trees-too.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/003-seeing-is-better-than-hearing-is-believing.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/004-time-is-gold.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/005-a-man-who-pursues-two-hares-will-catch-neither.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/006-short-lived-person.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/007-many-a-little-makes-a-great-deal.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/008-ignorance-is-bliss.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/009-better-a-dumpling-than-a-flower.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/010-it-is-dark-under-the-lighthouse.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/011-love-is-the-best-thing-to-do.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/012-regret-is-the-last-straw.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/013-there-is-no-smoke-without-fire.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/014-the-stake-that-sticks-out-is-driven.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/015-a-good-medicine-is-bitter-to-the-mouth.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/016-water-to-the-bone.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/017-golden-stick-for-a-demon.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/018-too-much-throat-makes-one-forget-the-heat.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/019-falling-seven-times-and-getting-up-eight-times.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/020-a-person-who-has-power.k.a.-subordinate-force.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/021-the-face-of-buddha-is-as-good-as-three-times.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/022-a-stranger-is-better-than-a-distant-relative.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/023-a-hated-child-is-afraid-of-the-world.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/024-money-goes-round-the-world.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/025-do-not-get-caught-up-in-long-things.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/026-be-bitten-on-the-hand-by-one's-dog.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/027-a-prayer-to-the-ear-of-a-horse.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/028-a-fire-on-the-other-side-of-the-river.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/029-within-a-stone's-throw-of.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/030-a-crack-in-the-neck-of-a-person's-edge.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/031-to-make-matters-worse.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/032-A-good-workman-is-apt-to-make-mistakes-in-his-penmanship-is-a-bad-workman.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/033-like-an-arrow-in-the-shade.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/034-if-you-hate-a-priest,-you-will-hate-everything.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/035-merit-of-injury.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/036-to-laugh-one's-head-off.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/037-if-it-mixes-with-vermilion-it-becomes-red.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/038-a-fox-that-borrows-the-power-of-a-tiger.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/039-count-the-chickens-before-they-are-hatched.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/040-poke-someone-in-the-back-of-one's-head.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/041-the-sound-of-a-crane.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/042-the-sword-of-moroha.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/043-there-is-good-fortune-in-leftovers.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/044-a-lump-in-one's-eye.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/045-even-if-it-goes-bad-it's-a-sea-bream.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/046-peony-rice-cake-from-the-shelf.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/047-to-drink-the-dirt-off-one's-nails.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/048-even-a-horseman-is-dressed.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/049-a-wet-hand-makes-a-chestnut.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/050-a-pail-house-is-profitable-in-the-wind-blows.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/051-eating-is-better-than-lust.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/052-you-may-ride-a-horse-but-don't-be-cajoled.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/053-the-edokko-has-no-money-to-spend-over-the-night.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/054-a-peony-in-one's-mouth.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/055-a-hasty-beggar-gets-little.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/056-i-am-sorry-to-have-opened-the-casket.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface/blog.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface/blog.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/config.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;luke2327&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/luke2327/japanese-fmawo.git&quot;,
+    &quot;accountId&quot;: &quot;b897e976-3e8e-4be5-a4d5-629256b13dd7&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2lBlN2uxQlyxWJdUXQv7iHc8ilJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;kr-beauty&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/bigpicture/git/japanese-fmawo&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/bigpicture/git/japanese-fmawo/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="f828aac7-ab6f-4919-8576-56040d01f031" name="변경" comment="" />
+      <created>1724661306715</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1724661306715</updated>
+      <workItem from="1724661308374" duration="5894000" />
+      <workItem from="1724826713861" duration="599000" />
+      <workItem from="1724910727145" duration="2369000" />
+      <workItem from="1725931186994" duration="39000" />
+      <workItem from="1725931245487" duration="599000" />
+      <workItem from="1725933998415" duration="599000" />
+      <workItem from="1727430872645" duration="1673000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
