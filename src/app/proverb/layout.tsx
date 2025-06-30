@@ -10,7 +10,7 @@ export default function ProverbLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="max-w-xl flex flex-col justify-center mx-auto">
+    <section className="max-w-xl w-full flex flex-col justify-center mx-auto">
       {children}
     </section>
   );

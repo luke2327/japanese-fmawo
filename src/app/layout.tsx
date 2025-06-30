@@ -1,6 +1,6 @@
 import "./global.css";
 import type { Metadata, Viewport } from "next";
-import { Navbar } from "../components/nav";
+import Nav from "../components/nav";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -76,6 +76,9 @@ export const metadata: Metadata = {
     title: "MW",
     card: "summary_large_image",
   },
+  verification: {
+    yandex: "0d36be2ea539a1a3",
+  },
 };
 
 const cx = (...classes) => classes.filter(Boolean).join(" ");
@@ -89,14 +92,14 @@ export default function RootLayout({
     <html lang="ko">
       <body
         className={cx(
-          "antialiased mb-4 flex flex-col md:flex-row mx-1 lg:mx-auto",
+          "antialiased mb-4 flex flex-col md:flex-row !mx-0 !px-0 lg:mx-auto",
           "text-black bg-white dark:text-white dark:bg-[#111010] font-azuki",
           raleway.variable,
           azuki.variable,
           skybori.variable
         )}>
-        <main className="flex-auto min-w-0 mt-4 flex flex-col px-2">
-          <Navbar />
+        <main className="flex-auto min-w-0 flex flex-col px-2">
+          <Nav />
           {children}
           <SpeedInsights />
           <PreloadResources />

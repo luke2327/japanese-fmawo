@@ -1,4 +1,5 @@
 import { dashboard } from "@/app/db/blog-client";
+import AnimateItems from "@/components/animate/animate-items";
 import { DailyPost } from "@/components/daily-post";
 
 export default async function Page() {
@@ -10,9 +11,12 @@ export default async function Page() {
         <span className="font-skybori">오늘의 일본속담</span>
       </h1>
       <div className="prose-neutral dark:prose-invert flex-col flex items-start gap-2 font-raleway">
-        {dashboardDatas.dailyPost.map((post) => (
-          <DailyPost key={post.postNo} post={post} />
-        ))}
+        <AnimateItems
+          scaleOffset={1}
+          items={dashboardDatas.dailyPost.map((post) => (
+            <DailyPost key={post.postNo} post={post} />
+          ))}
+        />
       </div>
     </section>
   );

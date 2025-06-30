@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    ppr: true,
-  },
-  reactStrictMode: false,
+  // experimental: {
+  //   ppr: true,
+  // },
+  reactStrictMode: true,
   async redirects() {
     return [
       {
@@ -41,8 +41,8 @@ const nextConfig = {
 };
 
 const ContentSecurityPolicy = `
-    default-src 'self' vercel.live googleads.g.doubleclick.net tpc.googlesyndication.com www.google.com;
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' cdn.vercel-insights.com vercel.live va.vercel-scripts.com www.googletagmanager.com pagead2.googlesyndication.com tpc.googlesyndication.com;
+    default-src 'self' vercel.live googleads.g.doubleclick.net tpc.googlesyndication.com www.google.com pagead2.googlesyndication.com https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js;
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' cdn.vercel-insights.com vercel.live va.vercel-scripts.com www.googletagmanager.com pagead2.googlesyndication.com tpc.googlesyndication.com https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js;
     style-src 'self' 'unsafe-inline';
     img-src * blob: data:;
     media-src 'none';

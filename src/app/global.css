@@ -148,3 +148,149 @@ table {
 #ja-proverb-title {
   font-family: var(--font-azuki);
 }
+
+@charset "utf-8";
+
+.kcalendar {
+  font-size: 1em;
+  color: #ffffff;
+  text-align: center;
+}
+.kcalendar h3 {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  margin: 0px;
+  margin-bottom: 12px;
+}
+.kcalendar table {
+  width: 100%;
+  min-width: 100%;
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+.kcalendar table tr td {
+  font-size: 0.9em;
+  text-align: center;
+  width: 14%;
+  padding: 2px 0px;
+}
+.kcalendar table tr:first-child td {
+  /* background-color:#eeeeee; */
+} /* week style */
+.kcalendar table tr td:first-child {
+  width: 15%;
+  color: #f72c08;
+} /* sunday */
+.kcalendar table tr td:last-child {
+  width: 15%;
+  color: #0174fd;
+} /* saturday */
+.kcalendar table tr td.hkr {
+  color: #ff0000;
+} /* korean holiday */
+.kcalendar table tr td.hjp {
+  border: 1px solid #000;
+  background-color: #accbbd;
+  color: #444444;
+  border-radius: 4px;
+} /* japanese holiday */
+.kcalendar table tr td.hcn {
+  background-color: #e2fce1;
+} /* chinese holiday */
+.kcalendar table tr td.hbr:after {
+  content: "　";
+  position: relative;
+} /* Blank Line */
+.kcalendar .kcalimg {
+}
+
+/* for BOX */
+.cabox .kcalendar table tr td {
+  border-top: 1px solid #eeeeee;
+  border-left: 1px solid #eeeeee;
+}
+.cabox .kcalendar table tr:last-child td {
+  border-bottom: 1px solid #eeeeee;
+}
+.cabox .kcalendar table tr td:last-child {
+  border-right: 1px solid #eeeeee;
+}
+.cabox .kcalendar table tr:first-child td {
+  background-color: #f8f8f8;
+}
+
+/* for WEEK GRAY Style */
+.cagry .kcalendar table tr:first-child td {
+  font-weight: bold;
+  color: #666666 !important;
+}
+
+.kholiday {
+  font-size: 1em;
+  color: #ffffff;
+  margin-top: 5px;
+  text-align: left;
+}
+.kholiday table {
+  font-size: 0.85em;
+  line-height: 120%;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+.kholiday table tr {
+  vertical-align: top;
+}
+.kholiday table .hdt {
+  font-weight: bold;
+  display: inline;
+  margin-right: 6px;
+}
+.kholiday table .hnm {
+  color: #ffffff;
+}
+.kholiday table .hkr {
+  color: #ff0000;
+}
+.kholiday table .hjp {
+  color: #47a3ed;
+}
+.kholiday table .hcn {
+  color: #339933;
+}
+.kholiday table tr th,
+.kholiday table tr td {
+  padding: 0px;
+  padding-top: 2px;
+  text-align: left;
+}
+.kholiday table tr th {
+  padding-right: 6px;
+  text-align: right;
+  word-break: keep-all;
+}
+.kholiday table tr a {
+  text-decoration: underline;
+  color: inherit;
+}
+
+/* top BORDER & BOX Type */
+.holine .kholiday {
+  border-top: 1px solid #cccccc;
+  padding-top: 5px;
+}
+.hobox .kholiday {
+  padding: 8px;
+  background-color: #f6f6f6;
+}
+
+/* for MOBILE */
+.kmob .kcalendar table tr td {
+  padding: 5px 0px;
+  line-height: 140%;
+}
+.kmob .kholiday table tr td {
+  line-height: 140%;
+  padding-bottom: 4px;
+}

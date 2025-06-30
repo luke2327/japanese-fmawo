@@ -70,3 +70,41 @@ export const getUUID = () => {
     return v.toString(16);
   });
 };
+
+export const uploadThumbnail = async (
+  file: File,
+  slug: string,
+  prefix?: string
+) => {
+  const uuid = getUUID();
+  const fileExt = file.name.split(".")[1];
+  const response = await fetch(`/api/proverb/upload-thumbnail`, {
+    headers: { "Content-Type": "image/jpeg" },
+    method: "POST",
+    body: JSON.stringify({
+      uuid,
+      slug,
+      fileExt,
+      contentType: `image/${fileExt === "jpg" ? "jpeg" : fileExt}`,
+    }),
+  });
+
+  const { url, fields } = await response.json();
+  const formData = new FormData();
+  Object.entries(fields).forEach(([key, value]) => {
+    formData.append(key, value as string);
+  });
+  formData.append("file", file);
+
+  await fetch(url, { method: "POST", body: formData });
+
+  return prefix + `/${slug}/${uuid}.${fileExt}`;
+};
+
+export const makeSlug = (string: string) =>
+  string
+    .toLowerCase()
+    .replace(/,/g, " ")
+    .replace(/\s\s/g, " ")
+    .split(" ")
+    .join("-");

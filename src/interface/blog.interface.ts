@@ -31,6 +31,7 @@ export type BlogPost = {
   postNo: number;
   postIndex: number;
   contents: string;
+  contentsEn?: string;
   language: "ko" | "en";
   slug: string;
   type: "proverb";
@@ -39,11 +40,14 @@ export type BlogPost = {
   titleEn: string;
   writer: string;
   publishedAt: string;
+  lastModifiedAt?: string;
   thumbnailUrl: string;
   thumbnailWidth: number;
   thumbnailHeight: number;
-  tags: string[];
+  tags?: string[];
   views: number;
+  check: boolean;
+  workMember?: number;
 };
 
 export type BlogComment = {
@@ -58,7 +62,7 @@ export type BlogComment = {
   ipAddress: string;
 };
 
-export type PostingInsert = Required<
+export type PostingInsert = { worker?: string } & Required<
   Pick<
     BlogPost,
     | "postIndex"
@@ -69,6 +73,8 @@ export type PostingInsert = Required<
     | "titleJa"
     | "writer"
     | "thumbnailUrl"
+    | "workMember"
+    | "check"
   >
 > &
   Partial<
@@ -85,15 +91,25 @@ export type PostingInsert = Required<
   >;
 export type PostingEdit = Pick<
   BlogPost,
-  "postNo" | "contents" | "titleKo" | "titleEn" | "titleJa" | "thumbnailUrl"
+  | "postNo"
+  | "contents"
+  | "titleKo"
+  | "titleEn"
+  | "titleJa"
+  | "thumbnailUrl"
+  | "workMember"
+  | "check"
 >;
 export type Dashboard = {
-  dailyPost: (Pick<
-    BlogPost,
-    "postNo" | "titleKo" | "publishedAt" | "writer" | "thumbnailUrl" | "slug"
-  > & {
+  dailyPost: (BlogPost & {
     description: string;
     thumbnailAlt: string;
     commentList: BlogComment[];
   })[];
+};
+export type WorkInfo = {
+  workPosts: BlogPost[];
+  total: number;
+  compelete: number;
+  incomplete: number;
 };

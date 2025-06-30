@@ -8,6 +8,7 @@ import { Comment } from "@/components/blog/comment";
 import { getPostingDetail } from "@/app/db/blog-client";
 import Share from "@/components/share";
 import { Views } from "@/components/blog/views";
+import AnimateWrapper from "@/components/blog/animate-wrapper";
 
 const { host } = config;
 
@@ -84,35 +85,37 @@ export default async function Blog({ params }) {
           }),
         }}
       />
-      <div className="sticky top-0 z-20 bg-white dark:bg-[#111010] py-2">
-        <h1 className="title font-medium md:text-2xl text-lg tracking-tighter max-w-[650px]">
-          <span className="font-azuki">{post.titleJa}</span>
-          <span className="font-skybori">({post.titleKo})</span>
-        </h1>
-        <div className="justify-between items-center my-2 text-sm max-w-[650px] flex font-skybori">
-          <div className="flex justify-between items-center text-sm">
-            <p
-              id="writer"
-              className="text-sm text-neutral-600 dark:text-neutral-400">
-              {post.writer}
-            </p>
-            <p className="mx-1">・</p>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              {formatDate(post.publishedAt)}
-            </p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <Suspense fallback={<p className="h-5" />}>
-              <Views postNo={post.postNo} />
-            </Suspense>
-            <Share />
+      <AnimateWrapper>
+        <div className="sticky top-0 z-20 bg-white dark:bg-[#111010] py-2">
+          <h1 className="title font-medium md:text-2xl text-lg tracking-tighter max-w-[650px]">
+            <span className="font-azuki">{post.titleJa}</span>
+            <span className="font-skybori">({post.titleKo})</span>
+          </h1>
+          <div className="justify-between items-center my-2 text-sm max-w-[650px] flex font-skybori">
+            <div className="flex justify-between items-center text-sm">
+              <p
+                id="writer"
+                className="text-sm text-neutral-600 dark:text-neutral-400">
+                {post.writer}
+              </p>
+              <p className="mx-1">・</p>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                {formatDate(post.publishedAt)}
+              </p>
+            </div>
+            <div className="flex gap-2 items-center">
+              <Suspense fallback={<p className="h-5" />}>
+                <Views postNo={post.postNo} />
+              </Suspense>
+              <Share />
+            </div>
           </div>
         </div>
-      </div>
-      <article className="prose prose-quoteless prose-neutral dark:prose-invert font-skybori">
-        <CustomMDX source={post.contents} />
-      </article>
-      <Comment postNo={post.postNo} />
+        <article className="prose prose-quoteless prose-neutral dark:prose-invert font-skybori">
+          <CustomMDX source={post.contents} />
+        </article>
+        <Comment postNo={post.postNo} />
+      </AnimateWrapper>
     </>
   );
 }

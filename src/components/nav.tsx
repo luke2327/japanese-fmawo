@@ -13,7 +13,7 @@ import { motion, LayoutGroup } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
-import { HomeIcon, icons } from "lucide-react";
+import { icons } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems: Record<string, { name?: string; icon?: keyof typeof icons }> = {
@@ -28,17 +28,21 @@ const navItems: Record<string, { name?: string; icon?: keyof typeof icons }> = {
     icon: "BookMarked",
   },
   // "/dictionary": {
-  //   name: "Dictionary",
+  //   name: "일본사전",
+  //   icon: "BookOpenText",
   // },
-  "/guide": {
-    name: "일본가이드",
+  // "/contents": {
+  //   name: "Contents",
+  // },
+  "/dialects": {
+    name: "일본방언",
     icon: "Compass",
   },
 };
 
 const wideScreenPaths = ["/guide/public-holidays", "/guide/calendar"];
 
-export function Navbar() {
+export default function Nav() {
   let pathname = usePathname() || "/";
   if (pathname.includes("/proverb/")) {
     pathname = "/proverb";
@@ -49,14 +53,15 @@ export function Navbar() {
   return (
     <aside
       className={cn(
-        "max-w-xl w-full mx-auto flex justify-start mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10 py-2 font-skybori",
-        maxWidth
-      )}>
+        "max-w-full sm:max-w-xl w-full sm:mx-auto flex justify-start mb-0 tracking-tight sticky top-0 bg-white dark:bg-[#111010] z-10 py-2 font-skybori"
+      )}
+    >
       <div>
         <LayoutGroup>
           <nav
             className="flex flex-row items-start justify-between relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
-            id="nav">
+            id="nav"
+          >
             <div className="flex flex-row space-x-0">
               <Suspense fallback={null}>
                 {Object.entries(navItems).map(([path, { name, icon }]) => {
@@ -102,7 +107,8 @@ function NavItem({
       className={cx(
         "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle gap-2",
         isActive ? "dark:text-neutral-200" : "text-neutral-500"
-      )}>
+      )}
+    >
       <span className="relative py-1 pr-3 text-lg flex items-center">
         {icon && <Icon2 className="mr-2 top-[2px] relative" name={icon} />}
         {name}
