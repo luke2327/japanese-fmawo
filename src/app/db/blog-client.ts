@@ -1,6 +1,6 @@
 import { blogComment } from "@/constant/blog-comment";
 import { blogPost } from "@/constant/blog-post";
-import { blogPostDaily, blogRandomPost } from "@/constant/blog-post-daily";
+import { blogPostDaily } from "@/constant/blog-post-daily";
 import {
   MDXData,
   Metadata,
@@ -42,7 +42,6 @@ function extractTweetIds(content) {
 export type Posting = Awaited<ReturnType<typeof getPostings>>[0];
 export async function getPostings(keyword?: string | null) {
   const decodedKeyword = decodeURIComponent(keyword || "");
-  console.log('키워드', decodedKeyword);
   // const datas = await fetcher<BlogPost[]>(
   //   `/v2023/blog/proverb/list${keyword ? `/${keyword}` : ""}`,
   //   { next: { revalidate: 60 } }
@@ -50,8 +49,6 @@ export async function getPostings(keyword?: string | null) {
   const datas = keyword ?
     blogPost.filter((post) => post.titleKo.includes(decodedKeyword) || post.titleJa.includes(decodedKeyword)) :
     blogPost;
-
-  console.log("datas", datas);
 
   return datas.map((data) => {
     return {
@@ -277,7 +274,6 @@ export async function getComment(postNo: number) {
 export async function dashboard() {
   const dailyPost = blogPostDaily.map((post) => {
     const commentList = blogComment.filter((comment) => comment.postNo === post.postNo);
-    console.log("댓글", commentList);
     return {
       ...post,
       commentList: commentList,
